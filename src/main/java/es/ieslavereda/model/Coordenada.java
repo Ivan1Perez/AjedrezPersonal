@@ -42,6 +42,14 @@ public class Coordenada {
         return down().left();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Coordenada){
+            Coordenada c = (Coordenada) obj;
+            return col == c.col && fila == c.fila;
+        }
+        return false;
+    }
 
     @Override
     public String toString(){
