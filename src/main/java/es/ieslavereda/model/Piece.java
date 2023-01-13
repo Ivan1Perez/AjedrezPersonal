@@ -8,10 +8,12 @@ import static com.diogonunes.jcolor.Ansi.colorize;
 
 public class Piece {
     private PieceType shape;
-    private Color color;
 
-    public Piece(PieceType shape){
+    private Celda celda;
+
+    public Piece(PieceType shape, Celda celda){
         this.shape = shape;
+        this.celda = celda;
     }
 
     @Override
