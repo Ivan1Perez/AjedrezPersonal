@@ -10,7 +10,15 @@ public class Coordenada {
         this.fila = fila;
     }
 
-   public Coordenada up(){
+    public int getFila() {
+        return fila;
+    }
+
+    public char getCol() {
+        return col;
+    }
+
+    public Coordenada up(){
         return new Coordenada(col, fila-1);
    }
 
