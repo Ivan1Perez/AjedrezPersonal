@@ -25,8 +25,25 @@ public class Tablero {
     }
 
     public void placePieces(){
-        Piece p = new CaballoBlanco(getCelda(new Coordenada('G',8)));
+        Piece p;
+        p = new CaballoBlanco(getCelda(new Coordenada('G',8)));
         p.putInYourPlace();
+        p = new CaballoBlanco(getCelda(new Coordenada('C',8)));
+        p.putInYourPlace();
+        p = new CaballoNegro(getCelda(new Coordenada('G',1)));
+        p.putInYourPlace();
+
+    }
+
+    public void highlight(Coordenada[] coordenadas){
+        for (Coordenada c : coordenadas)
+            getCelda(c).highlight();
+    }
+
+    public void resetColors(){
+        for (Celda[] row: celdas)
+            for(Celda c : row)
+                c.resetColor();
     }
 
     @Override

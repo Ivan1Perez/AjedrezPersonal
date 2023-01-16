@@ -11,9 +11,16 @@ public class Main {
 //            System.out.println(new Piece(pieceType));
 
         Tablero t = new Tablero();
+        t.placePieces();
+
+        Coordenada[] coordenadas = t.getCelda(new Coordenada('G',8)).getPiece().getNextMoves();
+        t.highlight(coordenadas);
         System.out.println(t);
-       t.placePieces();
-        System.out.println(t);
+        t.highlight(coordenadas);
+
+        for(Coordenada c : coordenadas) {
+            System.out.print(c + " ");
+        }
 
     }
 }

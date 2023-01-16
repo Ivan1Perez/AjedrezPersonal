@@ -29,6 +29,12 @@ public class Celda {
         return tablero;
     }
 
+    public boolean isEmpty(){
+        if(piece == null)
+            return true;
+        return false;
+    }
+
     public Coordenada getCoordenada() {
         return coordenada;
     }
