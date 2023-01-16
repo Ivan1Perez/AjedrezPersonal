@@ -2,33 +2,23 @@ package es.ieslavereda.model;
 
 import com.diogonunes.jcolor.Attribute;
 public enum Color {
+    BLACK(Attribute.BLACK_TEXT()),
+    WHITE(Attribute.TEXT_COLOR(150,150,150));
 
-    BLACK(Attribute.BLACK_TEXT(), Attribute.WHITE_BACK()),
-    WHITE(Attribute.TEXT_COLOR(150, 150, 150), Attribute.BLACK_BACK());
+    private Attribute attribute;
 
-
-    Attribute color;
-    Attribute background;
-    Color(Attribute color, Attribute background){
-        this.color=color;
-        this.background = background;
+    Color(Attribute attribute){
+        this.attribute = attribute;
     }
 
-    public Attribute getColor(){
-        return color;
-    }
-
-    public Attribute getBackground() {
-        return background;
+    public Attribute getAttribute() {
+        return attribute;
     }
 
     public Color next(){
-
         if(this.equals(WHITE))
             return BLACK;
         return WHITE;
-
-//        return values()[(ordinal()+1% values().length];
-
+        //return values()[(ordinal()+1)% values().length];
     }
 }

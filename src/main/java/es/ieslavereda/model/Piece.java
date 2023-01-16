@@ -19,23 +19,23 @@ public class Piece {
     @Override
     public String toString(){
 //        return "Shape: " + shape.shape + "\n";
-        return colorize(shape.toString(),shape.color.getColor(),shape.color.getBackground());
+        return colorize(shape.toString(),shape.color.getAttribute(),celda.getColor().getAttribute());
     }
 
     public enum PieceType {
 
-        BLACK_CABALLO ('♘', Color.BLACK),
-        BLACK_ALFIL ('♗', Color.BLACK),
-        BLACK_PEON('♙', Color.BLACK),
-        BLACK_REINA('♕', Color.BLACK),
-        BLACK_REY('♔', Color.BLACK),
-        BLACK_TORRE('♖', Color.BLACK),
-        WHITE_CABALLO ('♘', Color.WHITE),
-        WHITE_ALFIL ('♗', Color.WHITE),
-        WHITE_PEON('♙', Color.WHITE),
-        WHITE_REINA('♕', Color.WHITE),
-        WHITE_REY('♔', Color.WHITE),
-        WHITE_TORRE('♖', Color.WHITE);
+        BLACK_CABALLO ('♞', Color.BLACK),
+        BLACK_ALFIL ('♝', Color.BLACK),
+        BLACK_PEON('♟', Color.BLACK),
+        BLACK_REINA('♛', Color.BLACK),
+        BLACK_REY('♚', Color.BLACK),
+        BLACK_TORRE('♜', Color.BLACK),
+        WHITE_CABALLO ('♞', Color.WHITE),
+        WHITE_ALFIL ('♝', Color.WHITE),
+        WHITE_PEON('♟', Color.WHITE),
+        WHITE_REINA('♛', Color.WHITE),
+        WHITE_REY('♚', Color.WHITE),
+        WHITE_TORRE('♜', Color.WHITE);
 
         private char shape;
         private Color color;
@@ -43,6 +43,10 @@ public class Piece {
         PieceType(char shape,  Color color){
             this.shape = shape;
             this.color = color;
+        }
+
+        public char getShape() {
+            return shape;
         }
 
         @Override
