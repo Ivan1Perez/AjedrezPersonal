@@ -3,7 +3,7 @@ package es.ieslavereda.model;
 import com.diogonunes.jcolor.Attribute;
 public enum Color {
     BLACK(Attribute.BLACK_TEXT()),
-    WHITE(Attribute.TEXT_COLOR(150,150,150));
+    WHITE(Attribute.TEXT_COLOR(255,255,255));
 
     private Attribute attribute;
 

@@ -25,6 +25,14 @@ public class Celda {
         this.color = original;
     }
 
+    public Tablero getTablero() {
+        return tablero;
+    }
+
+    public Coordenada getCoordenada() {
+        return coordenada;
+    }
+
     public ColorCelda getColor() {
         return color;
     }

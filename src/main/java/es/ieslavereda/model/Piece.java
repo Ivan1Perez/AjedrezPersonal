@@ -6,7 +6,7 @@ import com.diogonunes.jcolor.Attribute;
 import static com.diogonunes.jcolor.Ansi.colorize;
 
 
-public class Piece {
+public abstract class Piece {
     private PieceType shape;
 
     private Celda celda;
@@ -16,13 +16,27 @@ public class Piece {
         this.celda = celda;
     }
 
+    public Celda getCelda() {
+        return celda;
+    }
+
+    public Color getColor(){
+        return shape.color;
+    }
+
+    public void putInYourPlace(){
+        celda.setPiece(this);
+    }
+
     @Override
     public String toString(){
 //        return "Shape: " + shape.shape + "\n";
         return colorize(shape.toString(),shape.color.getAttribute(),celda.getColor().getAttribute());
     }
 
-    public enum PieceType {
+    public abstract Coordenada[] getNextMoves();
+
+     enum PieceType {
 
         BLACK_CABALLO ('♞', Color.BLACK),
         BLACK_ALFIL ('♝', Color.BLACK),
