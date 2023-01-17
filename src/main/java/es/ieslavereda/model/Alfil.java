@@ -8,7 +8,7 @@ public abstract class Alfil extends Piece{
         super(pieceType, celda);
     }
 
-    public static Coordenada[] getNextMovesAsTorre(Piece p){
+    public static Coordenada[] getNextMovesAsAlfil(Piece p){
         Coordenada[] coordenadas = new Coordenada[0];
         Celda celda = p.getCelda();
         Tablero tablero = celda.getTablero();
@@ -21,7 +21,34 @@ public abstract class Alfil extends Piece{
         c = original.upLeft();
         while(tablero.getCelda(c)!=null && tablero.getCelda(c).isEmpty()) {
             coordenadas = Tool.add(coordenadas, c);
-            c = c.up();
+            c = c.upLeft();
+        }
+        if(tablero.getCelda(c)!=null && tablero.getCelda(c).getPiece().getColor()!=p.getColor())
+            coordenadas = Tool.add(coordenadas, c);
+
+        //UpRight
+        c = original.upRight();
+        while(tablero.getCelda(c)!=null && tablero.getCelda(c).isEmpty()) {
+            coordenadas = Tool.add(coordenadas, c);
+            c = c.upRight();
+        }
+        if(tablero.getCelda(c)!=null && tablero.getCelda(c).getPiece().getColor()!=p.getColor())
+            coordenadas = Tool.add(coordenadas, c);
+
+        //DownLeft
+        c = original.downLeft();
+        while(tablero.getCelda(c)!=null && tablero.getCelda(c).isEmpty()) {
+            coordenadas = Tool.add(coordenadas, c);
+            c = c.downLeft();
+        }
+        if(tablero.getCelda(c)!=null && tablero.getCelda(c).getPiece().getColor()!=p.getColor())
+            coordenadas = Tool.add(coordenadas, c);
+
+        //DownRight
+        c = original.downRigth();
+        while(tablero.getCelda(c)!=null && tablero.getCelda(c).isEmpty()) {
+            coordenadas = Tool.add(coordenadas, c);
+            c = c.downRigth();
         }
         if(tablero.getCelda(c)!=null && tablero.getCelda(c).getPiece().getColor()!=p.getColor())
             coordenadas = Tool.add(coordenadas, c);

@@ -13,7 +13,7 @@ public class Main {
         Tablero t = new Tablero();
         t.placePieces();
 
-        Coordenada[] coordenadas = t.getCelda(new Coordenada('E',5)).getPiece().getNextMoves();
+        Coordenada[] coordenadas = t.getCelda(new Coordenada('C',5)).getPiece().getNextMoves();
         t.highlight(coordenadas);
         System.out.println(t);
         t.highlight(coordenadas);

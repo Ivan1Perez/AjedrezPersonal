@@ -29,6 +29,7 @@ public class Tablero {
         new CaballoBlanco(getCelda(new Coordenada('B',8)));
         new CaballoNegro(getCelda(new Coordenada('E',1)));
         new TorreBlanca(getCelda(new Coordenada('E',5)));
+        new AlfilBlanco(getCelda(new Coordenada('C', 5)));
 
     }
 
