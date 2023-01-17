@@ -64,10 +64,10 @@ public class Celda {
     enum ColorCelda {
         WHITE_CELL(Attribute.BACK_COLOR(180, 180, 180)),
         BLACK_CELL(Attribute.BACK_COLOR(100, 100, 100)),
-        HIGHLIGHT_WHITE(Attribute.BACK_COLOR(180, 0, 0)),
-        HIGHLIGHT_BLACK(Attribute.BACK_COLOR(130, 0, 0)),
-        HIGHLIGHT_KILL_WHITE(Attribute.BACK_COLOR(180, 180, 0)),
-        HIGHLIGHT_KILL_BLACK(Attribute.BACK_COLOR(130, 130, 0));
+        HIGHLIGHT_WHITE(Attribute.BACK_COLOR(180, 180, 0)),
+        HIGHLIGHT_BLACK(Attribute.BACK_COLOR(130, 180, 0)),
+        HIGHLIGHT_KILL_WHITE(Attribute.BACK_COLOR(180, 0, 0)),
+        HIGHLIGHT_KILL_BLACK(Attribute.BACK_COLOR(130, 0, 0));
 
         private Attribute attribute;
 

@@ -32,6 +32,8 @@ public class Tablero {
         p.putInYourPlace();
         p = new CaballoNegro(getCelda(new Coordenada('G',1)));
         p.putInYourPlace();
+        p = new TorreBlanca(getCelda(new Coordenada('E',5)));
+        p.putInYourPlace();
 
     }
 
