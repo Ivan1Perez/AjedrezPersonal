@@ -14,6 +14,7 @@ public abstract class Piece {
     public Piece(PieceType shape, Celda celda){
         this.shape = shape;
         this.celda = celda;
+        putInYourPlace();
     }
 
     public Celda getCelda() {

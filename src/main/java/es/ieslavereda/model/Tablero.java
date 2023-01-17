@@ -25,15 +25,10 @@ public class Tablero {
     }
 
     public void placePieces(){
-        Piece p;
-        p = new CaballoBlanco(getCelda(new Coordenada('G',8)));
-        p.putInYourPlace();
-        p = new CaballoBlanco(getCelda(new Coordenada('C',8)));
-        p.putInYourPlace();
-        p = new CaballoNegro(getCelda(new Coordenada('G',1)));
-        p.putInYourPlace();
-        p = new TorreBlanca(getCelda(new Coordenada('E',5)));
-        p.putInYourPlace();
+        new CaballoBlanco(getCelda(new Coordenada('G',8)));
+        new CaballoBlanco(getCelda(new Coordenada('B',8)));
+        new CaballoNegro(getCelda(new Coordenada('E',1)));
+        new TorreBlanca(getCelda(new Coordenada('E',5)));
 
     }
 
