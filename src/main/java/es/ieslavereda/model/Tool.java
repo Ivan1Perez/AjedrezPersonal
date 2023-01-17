@@ -11,4 +11,13 @@ public class Tool {
         return aux;
     }
 
+    public static Coordenada[]  merge(Coordenada[] c1,Coordenada[] c2){
+        Coordenada[] aux = new Coordenada[c1.length+c2.length];
+        for(int i=0;i<c1.length;i++)
+            aux[i]=c1[i];
+        for(int i=0;i<c2.length;i++)
+            aux[c1.length+i]=c2[i];
+        return aux;
+    }
+
 }
