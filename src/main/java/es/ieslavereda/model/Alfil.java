@@ -1,5 +1,7 @@
 package es.ieslavereda.model;
 
+import es.ieslavereda.Tool;
+
 public abstract class Alfil extends Piece{
 
     private Coordenada[] coordenadas;

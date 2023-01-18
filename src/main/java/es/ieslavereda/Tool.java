@@ -1,4 +1,6 @@
-package es.ieslavereda.model;
+package es.ieslavereda;
+
+import es.ieslavereda.model.Coordenada;
 
 public class Tool {
 

@@ -9,12 +9,24 @@ import static com.diogonunes.jcolor.Ansi.colorize;
 public abstract class Piece {
     private PieceType shape;
 
-    private Celda celda;
+    protected Celda celda;
 
     public Piece(PieceType shape, Celda celda){
         this.shape = shape;
         this.celda = celda;
         putInYourPlace();
+    }
+
+    public void moveTo(Coordenada c){
+        Tablero t = getCelda().getTablero();
+
+        // Check if the cell exists
+        if(t.getCelda(c)!=null) {
+            getCelda().setPiece(null);
+            Celda celda = t.getCelda(c);
+            celda.setPiece(this);
+            this.celda = celda;
+        }
     }
 
     public Celda getCelda() {

@@ -1,13 +1,15 @@
 package es.ieslavereda.model;
 
+import es.ieslavereda.Tool;
+
 public abstract class Reina extends Piece{
 
-    public Reina(PieceType pieceType, Reina cell){
-        super(pieceType,cell);
+    public Reina(PieceType pieceType, Celda celda){
+        super(pieceType,celda);
     }
 
     @Override
-    public Coordenada[] getNextMovements() {
+    public Coordenada[] getNextMoves() {
 
         Coordenada[] coordinates1 = Torre.getNextMovesAsTorre(this);
         Coordenada[] coordinates2 = Alfil.getNextMovesAsAlfil(this);

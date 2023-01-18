@@ -2,45 +2,46 @@ package es.ieslavereda.model;
 
 import es.ieslavereda.Tool;
 
-public abstract class Caballo extends Piece{
+public class Rey extends Piece{
 
     private Coordenada[] coordenadas;
-    public Caballo(PieceType pieceType, Celda celda){
+    private boolean moved;
+
+    public Rey(PieceType pieceType, Celda celda){
         super(pieceType, celda);
+        moved = false;
+    }
+
+    public boolean hasMoved() {
+        return moved;
     }
 
     @Override
-    public Coordenada[] getNextMoves() {
+    public void moveTo(Coordenada c) {
+        super.moveTo(c);
+        moved=true;
+    }
+
+    public Coordenada[] getNextMoves(){
         coordenadas = new Coordenada[0];
         Coordenada position = getCelda().getCoordenada();
         Coordenada c;
 
-        //UpLeft
-        c = position.up().up().left();
+        //Up
+        c = position.up();
         check(c);
-        //UpRight
-        c = position.up().upRight();
+        //Right
+        c = position.right();
         check(c);
-        //LeftUp
-        c = position.left().left().up();
+        //Left
+        c = position.left();
         check(c);
-        //RightUp
-        c = position.right().right().up();
-        check(c);
-        //LeftDown
-        c = position.left().left().down();
-        check(c);
-        //RightDown
-        c = position.right().right().down();
-        check(c);
-        //DownLeft
-        c = position.down().down().left();
-        check(c);
-        //DownRight
-        c = position.down().down().right();
+        //Down
+        c = position.down();
         check(c);
 
         return coordenadas;
+
     }
 
     private void check(Coordenada c){
@@ -53,5 +54,6 @@ public abstract class Caballo extends Piece{
                 coordenadas = Tool.add(coordenadas, c);
         }
     }
+
 
 }

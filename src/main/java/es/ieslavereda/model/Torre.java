@@ -1,11 +1,25 @@
 package es.ieslavereda.model;
 
+import es.ieslavereda.Tool;
+
 public abstract class Torre extends Piece{
 
     private Coordenada[] coordenadas;
+    private boolean moved;
 
     public Torre(PieceType pieceType, Celda celda){
         super (pieceType, celda);
+        moved = false;
+    }
+
+    public boolean hasMoved() {
+        return moved;
+    }
+
+    @Override
+    public void moveTo(Coordenada c) {
+        super.moveTo(c);
+        moved=true;
     }
 
     public static Coordenada[] getNextMovesAsTorre(Piece p){
