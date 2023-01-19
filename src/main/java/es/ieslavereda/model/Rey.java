@@ -30,6 +30,12 @@ public class Rey extends Piece{
         //Up
         c = position.up();
         check(c);
+        //UpLeft
+        c = position.upLeft();
+        check(c);
+        //UpRight
+        c = position.upRight();
+        check(c);
         //Right
         c = position.right();
         check(c);
@@ -38,6 +44,12 @@ public class Rey extends Piece{
         check(c);
         //Down
         c = position.down();
+        check(c);
+        //DownLeft
+        c = position.downLeft();
+        check(c);
+        //DownRight
+        c = position.downRigth();
         check(c);
 
         return coordenadas;

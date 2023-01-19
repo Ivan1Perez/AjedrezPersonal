@@ -38,12 +38,12 @@ public class Tablero {
             new PeonBlanco(getCelda(new Coordenada(((char)('H'- i)), 7)));
         }
         new TorreBlanca(getCelda(new Coordenada('A',8)));
-        new CaballoBlanco(getCelda(new Coordenada('G',8)));
-        new AlfilBlanco(getCelda(new Coordenada('C', 8)));
-        new ReinaBlanca(getCelda(new Coordenada('D',8)));
+//        new CaballoBlanco(getCelda(new Coordenada('B',8)));
+//        new AlfilBlanco(getCelda(new Coordenada('C', 8)));
+//        new ReinaBlanca(getCelda(new Coordenada('D',8)));
         new ReyBlanco(getCelda(new Coordenada('E', 8)));
         new AlfilBlanco(getCelda(new Coordenada('F', 8)));
-        new CaballoBlanco(getCelda(new Coordenada('B',8)));
+        new CaballoBlanco(getCelda(new Coordenada('G',8)));
         new TorreBlanca(getCelda(new Coordenada('H',8)));
     }
 

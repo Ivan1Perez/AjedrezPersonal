@@ -35,33 +35,66 @@ public abstract class Peon extends Piece{
         coordenadas = new Coordenada[0];
         Coordenada position = getCelda().getCoordenada();
         Coordenada c;
-        boolean up = false;
+        boolean sameCol;
 
-        //Up
-        c = position.up();
-        if(c==position.up())
-        up = true;
-        check(c);
+        if (getColor() != Color.BLACK) {
+            sameCol = true;
 
-        //Initial UpLeft
-        c = position.upLeft();
-        check(c);
+            //Up
+            c = position.up();
+            check(c, sameCol);
+            if(!moved) {
+                c = position.up().up();
+                check(c, sameCol);
+            }
 
-        //Initial UpRight
-        c = position.upRight();
-        check(c);
+            sameCol = false;
+
+            //Initial UpLeft
+            c = position.upLeft();
+            check(c, sameCol);
+
+            //Initial UpRight
+            c = position.upRight();
+            check(c, sameCol);
+
+        }else{
+            sameCol = true;
+
+            //Down
+            c = position.down();
+            check(c, sameCol);
+            if(!moved) {
+                c = position.down().down();
+                check(c, sameCol);
+            }
+
+            sameCol = false;
+
+            //Initial DownLeft
+            c = position.downLeft();
+            check(c, sameCol);
+
+            //Initial DownRight
+            c = position.downRigth();
+            check(c, sameCol);
+        }
+
 
         return coordenadas;
     }
 
-    private void check(Coordenada c){
+    private void check(Coordenada c, boolean sameCol){
         Tablero tablero = getCelda().getTablero();
 
         if(tablero.getCelda(c)!=null){
-            if(tablero.getCelda(c).isEmpty())
-                coordenadas = Tool.add(coordenadas,c);
-            else if (tablero.getCelda(c).getPiece().getColor()!=getColor())
-                coordenadas = Tool.add(coordenadas, c);
+            if(sameCol) {
+                if (tablero.getCelda(c).isEmpty())
+                    coordenadas = Tool.add(coordenadas, c);
+            }else {
+                if (!tablero.getCelda(c).isEmpty() && tablero.getCelda(c).getPiece().getColor() != getColor())
+                    coordenadas = Tool.add(coordenadas, c);
+            }
         }
     }
 }
