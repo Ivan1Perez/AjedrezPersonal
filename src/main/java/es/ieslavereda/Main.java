@@ -1,5 +1,5 @@
 package es.ieslavereda;
-
+//prueba ajedrez personal
 import es.ieslavereda.model.*;
 
 //cometn prueba
