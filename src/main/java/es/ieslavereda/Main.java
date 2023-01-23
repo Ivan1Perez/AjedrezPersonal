@@ -2,7 +2,7 @@ package es.ieslavereda;
 //prueba ajedrez personal
 import es.ieslavereda.model.*;
 
-//cometn prueba
+//Check
 
 public class Main {
     public static void main(String[] args) {
