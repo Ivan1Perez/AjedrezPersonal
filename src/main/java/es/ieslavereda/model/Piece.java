@@ -10,15 +10,19 @@ public abstract class Piece {
     private PieceType shape;
 
     protected Celda celda;
+    private boolean moved;
+
 
     public Piece(PieceType shape, Celda celda){
         this.shape = shape;
         this.celda = celda;
+        moved = false;
         putInYourPlace();
     }
 
     public void moveTo(Coordenada c){
         Tablero t = getCelda().getTablero();
+        moved = true;
 
         // Check if the cell exists
         if(t.getCelda(c)!=null) {
@@ -27,6 +31,10 @@ public abstract class Piece {
             celda.setPiece(this);
             this.celda = celda;
         }
+    }
+
+    public boolean hasMoved() {
+        return moved;
     }
 
     public Celda getCelda() {

@@ -14,6 +14,7 @@ public abstract class Reina extends Piece{
         Coordenada[] coordinates1 = Torre.getNextMovesAsTorre(this);
         Coordenada[] coordinates2 = Alfil.getNextMovesAsAlfil(this);
 
+
         return Tool.merge(coordinates1,coordinates2);
     }
 

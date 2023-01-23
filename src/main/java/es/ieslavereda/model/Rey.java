@@ -52,6 +52,15 @@ public class Rey extends Piece{
         c = position.downRigth();
         check(c);
 
+
+        /*Nota: El enroque consiste en mover el rey dos casillas hacia la torre en la primera
+         fila del jugador, y luego mover la torre al escaque sobre que el rey ha cruzado.
+         */
+        //Enroque
+        if(!moved) {
+            checkEnroque(position);
+        }
+
         return coordenadas;
 
     }
@@ -65,7 +74,46 @@ public class Rey extends Piece{
             else if (tablero.getCelda(c).getPiece().getColor()!=getColor())
                 coordenadas = Tool.add(coordenadas, c);
         }
+
     }
 
+    private void checkEnroque(Coordenada c){
+        Tablero tablero = getCelda().getTablero();
+        int i = 0;
+
+        //Enroque largo
+        Coordenada[] checkEnroqueLargo = {
+                c.left(),
+                c.left().left(),
+                c.left().left().left(),
+                c.left().left().left().left()
+        };
+
+        if(!tablero.getCelda(checkEnroqueLargo[3]).isEmpty() && !tablero.getCelda(checkEnroqueLargo[3]).getPiece().hasMoved()) {
+            while (i < checkEnroqueLargo.length - 1 && tablero.getCelda(checkEnroqueLargo[i]).isEmpty()) {
+                i++;
+            }
+            //Si las 3 casillas del enroque largo están vacías se añadirá la coordenada.
+            if(i==3)
+                coordenadas = Tool.add(coordenadas, c.left().left());
+        }
+
+        i = 0;
+        //Enroque corto
+        Coordenada[] checkEnroqueCorto = {
+                c.right(),
+                c.right().right(),
+                c.right().right().right()
+        };
+
+        if(!tablero.getCelda(checkEnroqueCorto[2]).isEmpty() && !tablero.getCelda(checkEnroqueCorto[2]).getPiece().hasMoved()) {
+            while (i < checkEnroqueCorto.length - 1 && tablero.getCelda(checkEnroqueCorto[i]).isEmpty()) {
+                i++;
+            }
+            //Si las 3 casillas del enroque largo están vacías se añadirá la coordenada.
+            if(i==2)
+                coordenadas = Tool.add(coordenadas, c.right().right());
+        }
+    }
 
 }

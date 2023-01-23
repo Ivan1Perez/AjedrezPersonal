@@ -30,9 +30,10 @@ public class Main {
         t.getCelda(new Coordenada('E', 2)).getPiece().moveTo(new Coordenada('E', 3));
         t.getCelda(new Coordenada('F', 2)).getPiece().moveTo(new Coordenada('F', 4));
         t.getCelda(new Coordenada('E', 7)).getPiece().moveTo(new Coordenada('E', 6));
-//        t.getCelda(new Coordenada('E', 8)).getPiece().moveTo(new Coordenada('E', 4));
+        //Movemos la torre a propósito para comprobar que el método de enroque funciona correctamente
+        t.getCelda(new Coordenada('H', 1)).getPiece().moveTo(new Coordenada('H', 5));
 
-        Coordenada[] coordenadas = t.getCelda(new Coordenada('E',6)).getPiece().getNextMoves();
+        Coordenada[] coordenadas = t.getCelda(new Coordenada('E',1)).getPiece().getNextMoves();
         t.highlight(coordenadas);
         System.out.println(t);
         t.highlight(coordenadas);
