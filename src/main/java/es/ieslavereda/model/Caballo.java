@@ -1,10 +1,13 @@
 package es.ieslavereda.model;
 
+import es.ieslavereda.TAD.ListaSE;
 import es.ieslavereda.Tool;
 
 public abstract class Caballo extends Piece{
 
     private Coordenada[] coordenadas;
+    private ListaSE lista;
+
     public Caballo(PieceType pieceType, Celda celda){
         super(pieceType, celda);
     }

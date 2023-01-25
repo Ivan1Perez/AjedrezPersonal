@@ -1,10 +1,13 @@
 package es.ieslavereda.model;
 
+import es.ieslavereda.TAD.ListaSE;
 import es.ieslavereda.Tool;
 
 public abstract class Torre extends Piece{
 
     private Coordenada[] coordenadas;
+
+    private ListaSE lista;
     private boolean moved;
 
     public Torre(PieceType pieceType, Celda celda){

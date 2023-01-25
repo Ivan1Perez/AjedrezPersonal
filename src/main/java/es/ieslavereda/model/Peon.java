@@ -1,5 +1,6 @@
 package es.ieslavereda.model;
 
+import es.ieslavereda.TAD.ListaSE;
 import es.ieslavereda.Tool;
 
 public abstract class Peon extends Piece{
@@ -31,7 +32,7 @@ public abstract class Peon extends Piece{
     public abstract void transform();
 
     @Override
-    public Coordenada[] getNextMoves() {
+    public ListaSE getNextMoves() {
         coordenadas = new Coordenada[0];
         Coordenada position = getCelda().getCoordenada();
         Coordenada c;

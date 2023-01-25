@@ -1,5 +1,6 @@
 package es.ieslavereda.model;
 
+import es.ieslavereda.TAD.ListaSE;
 import javax.print.DocFlavor;
 import com.diogonunes.jcolor.Attribute;
 
@@ -55,7 +56,7 @@ public abstract class Piece {
         return colorize(shape.toString(),shape.color.getAttribute(),celda.getColor().getAttribute());
     }
 
-    public abstract Coordenada[] getNextMoves();
+    public abstract ListaSE getNextMoves();
 
      enum PieceType {
 
