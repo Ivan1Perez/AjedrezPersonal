@@ -1,6 +1,7 @@
 package es.ieslavereda.model;
 
 import es.ieslavereda.TAD.ListaSE;
+import es.ieslavereda.TAD.Node;
 import es.ieslavereda.Tool;
 
 public abstract class Peon extends Piece{

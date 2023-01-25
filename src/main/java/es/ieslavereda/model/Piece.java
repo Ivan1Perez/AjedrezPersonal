@@ -1,7 +1,8 @@
 package es.ieslavereda.model;
 
 import es.ieslavereda.TAD.ListaSE;
-import javax.print.DocFlavor;
+import es.ieslavereda.TAD.Node;
+
 import com.diogonunes.jcolor.Attribute;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
