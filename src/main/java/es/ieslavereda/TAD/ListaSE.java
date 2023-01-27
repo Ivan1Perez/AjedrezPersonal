@@ -21,8 +21,8 @@ public class ListaSE {
         return size;
     }
 
-    public int[] toArray(){
-        int[] array = new int[size];
+    public Coordenada[] toArray(){
+        Coordenada[] array = new Coordenada[size];
 
         Node aux = cabeza;
 
@@ -33,12 +33,12 @@ public class ListaSE {
         return array;
     }
 
-    public Integer remove(int index){
+    public Coordenada remove(int index){
         if(index>=size||index<0){
             return null;
         }
 
-        Integer value = null;
+        Coordenada value = null;
 
         if(index==0){
             cabeza = cabeza.getNext();
@@ -60,27 +60,13 @@ public class ListaSE {
     }
 
 
-
-
-    public void addHead(int numero){
-        Node node = new Node(numero);
-
-        if(cabeza==null) {
-            cabeza = node;
-            cola = node;
-        }else {
-            node.setNext(cabeza);
-            cabeza=node;
-        }
-
-        size++;
-    }
-//    public void addHead(int numero){
+//    public void addHead(Coordenada numero){
 //        Node node = new Node(numero);
 //
-//        if(cabeza==null)
-//            cabeza= node;
-//        else {
+//        if(cabeza==null) {
+//            cabeza = node;
+//            cola = node;
+//        }else {
 //            node.setNext(cabeza);
 //            cabeza=node;
 //        }
@@ -88,7 +74,20 @@ public class ListaSE {
 //        size++;
 //    }
 
-    public boolean contains(int numero){
+    public void addTail(Coordenada numero){
+        Node node = new Node(numero);
+
+        if(cabeza==null) {
+            cabeza = node;
+            cola = node;
+        }else{
+            cola.setNext(node);
+            cola = node;
+        }
+        size++;
+    }
+
+    public boolean contains(Coordenada numero){
 
         boolean encontrado = false;
 
@@ -103,7 +102,7 @@ public class ListaSE {
         return encontrado;
     }
 
-    public Integer get(int index){
+    public Coordenada get(int index){
         if(index>=size || index<0)
             return null;
 
@@ -121,45 +120,21 @@ public class ListaSE {
         cola=null;
         size=0;
     }
-    public void addTail(Coordenada numero){
-        Node node = new Node(numero);
 
-        if(cabeza==null) {
-            cabeza = node;
-            cola = node;
-        }else{
-            cola.setNext(node);
-            cola = node;
-        }
-        size++;
-    }
-//    public void addTail(int numero){
-//        Node node = new Node(numero);
-//
-//        if(cabeza==null)
-//            cabeza = node;
-//        else{
-//            Node aux = cabeza;
-//            while(aux.getNext()!=null)
-//                aux=aux.getNext();
-//
-//            aux.setNext(node);
-//        }
-//        size++;
-//    }
-
-    public boolean addAll(ListaSE l){
+    public ListaSE addAll(ListaSE l){
 
         boolean modificado = false;
         Node aux = l.cabeza;
+        int i = size;
 
         while(aux!=null){
             modificado=true;
             addTail(aux.getInfo());
             aux=aux.getNext();
+            i--;
         }
 
-        return modificado;
+        return l;
     }
 
     @Override

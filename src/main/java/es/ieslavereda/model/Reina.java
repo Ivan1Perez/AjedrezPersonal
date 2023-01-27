@@ -1,5 +1,6 @@
 package es.ieslavereda.model;
 
+import es.ieslavereda.TAD.ListaSE;
 import es.ieslavereda.Tool;
 
 public abstract class Reina extends Piece{
@@ -9,13 +10,13 @@ public abstract class Reina extends Piece{
     }
 
     @Override
-    public Coordenada[] getNextMoves() {
+    public ListaSE getNextMoves() {
 
-        Coordenada[] coordinates1 = Torre.getNextMovesAsTorre(this);
-        Coordenada[] coordinates2 = Alfil.getNextMovesAsAlfil(this);
+        ListaSE coordinates1 = Torre.getNextMovesAsTorre(this);
+        ListaSE coordinates2 = Alfil.getNextMovesAsAlfil(this);
 
 
-        return Tool.merge(coordinates1,coordinates2);
+        return coordinates1.addAll(coordinates2);
     }
 
 }

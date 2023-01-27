@@ -1,10 +1,11 @@
 package es.ieslavereda.model;
 
+import es.ieslavereda.TAD.ListaSE;
 import es.ieslavereda.Tool;
 
 public class Rey extends Piece{
 
-    private Coordenada[] coordenadas;
+    private ListaSE coordenadas;
     private boolean moved;
 
     public Rey(PieceType pieceType, Celda celda){
@@ -22,8 +23,9 @@ public class Rey extends Piece{
         moved=true;
     }
 
-    public Coordenada[] getNextMoves(){
-        coordenadas = new Coordenada[0];
+    @Override
+    public ListaSE getNextMoves(){
+        coordenadas = new ListaSE();
         Coordenada position = getCelda().getCoordenada();
         Coordenada c;
 
@@ -70,9 +72,9 @@ public class Rey extends Piece{
 
         if(tablero.getCelda(c)!=null){
             if(tablero.getCelda(c).isEmpty())
-                coordenadas = Tool.add(coordenadas,c);
+                coordenadas.addTail(c);
             else if (tablero.getCelda(c).getPiece().getColor()!=getColor())
-                coordenadas = Tool.add(coordenadas, c);
+                coordenadas.addTail(c);
         }
 
     }
@@ -82,38 +84,47 @@ public class Rey extends Piece{
         int i = 0;
 
         //Enroque largo
-        Coordenada[] checkEnroqueLargo = {
-                c.left(),
-                c.left().left(),
-                c.left().left().left(),
-                c.left().left().left().left()
-        };
+        ListaSE aux = new ListaSE();
+        aux.addTail(c.left());
+        aux.addTail(c.left().left());
+        aux.addTail(c.left().left().left());
+        aux.addTail(c.left().left().left().left());
 
-        if(!tablero.getCelda(checkEnroqueLargo[3]).isEmpty() && !tablero.getCelda(checkEnroqueLargo[3]).getPiece().hasMoved()) {
-            while (i < checkEnroqueLargo.length - 1 && tablero.getCelda(checkEnroqueLargo[i]).isEmpty()) {
-                i++;
-            }
-            //Si las 3 casillas del enroque largo están vacías se añadirá la coordenada.
-            if(i==3)
-                coordenadas = Tool.add(coordenadas, c.left().left());
+        while(tablero.getCelda(aux.get(i)).isEmpty() && i < aux.size()){
+            i++;
         }
-
-        i = 0;
-        //Enroque corto
-        Coordenada[] checkEnroqueCorto = {
-                c.right(),
-                c.right().right(),
-                c.right().right().right()
-        };
-
-        if(!tablero.getCelda(checkEnroqueCorto[2]).isEmpty() && !tablero.getCelda(checkEnroqueCorto[2]).getPiece().hasMoved()) {
-            while (i < checkEnroqueCorto.length - 1 && tablero.getCelda(checkEnroqueCorto[i]).isEmpty()) {
-                i++;
-            }
-            //Si las 3 casillas del enroque largo están vacías se añadirá la coordenada.
-            if(i==2)
-                coordenadas = Tool.add(coordenadas, c.right().right());
-        }
+//        Coordenada[] checkEnroqueLargo = {
+//                c.left(),
+//                c.left().left(),
+//                c.left().left().left(),
+//                c.left().left().left().left()
+//        };
+//
+//        if(!tablero.getCelda(checkEnroqueLargo[3]).isEmpty() && !tablero.getCelda(checkEnroqueLargo[3]).getPiece().hasMoved()) {
+//            while (i < checkEnroqueLargo.length - 1 && tablero.getCelda(checkEnroqueLargo[i]).isEmpty()) {
+//                i++;
+//            }
+//            //Si las 3 casillas del enroque largo están vacías se añadirá la coordenada.
+//            if(i==3)
+//                coordenadas = Tool.add(coordenadas, c.left().left());
+//        }
+//
+//        i = 0;
+//        //Enroque corto
+//        Coordenada[] checkEnroqueCorto = {
+//                c.right(),
+//                c.right().right(),
+//                c.right().right().right()
+//        };
+//
+//        if(!tablero.getCelda(checkEnroqueCorto[2]).isEmpty() && !tablero.getCelda(checkEnroqueCorto[2]).getPiece().hasMoved()) {
+//            while (i < checkEnroqueCorto.length - 1 && tablero.getCelda(checkEnroqueCorto[i]).isEmpty()) {
+//                i++;
+//            }
+//            //Si las 3 casillas del enroque largo están vacías se añadirá la coordenada.
+//            if(i==2)
+//                coordenadas = Tool.add(coordenadas, c.right().right());
+//        }
     }
 
 }

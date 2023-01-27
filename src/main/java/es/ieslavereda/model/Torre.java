@@ -5,9 +5,8 @@ import es.ieslavereda.Tool;
 
 public abstract class Torre extends Piece{
 
-    private Coordenada[] coordenadas;
 
-    private ListaSE lista;
+    private ListaSE coordenadas;
     private boolean moved;
 
     public Torre(PieceType pieceType, Celda celda){
@@ -25,8 +24,8 @@ public abstract class Torre extends Piece{
         moved=true;
     }
 
-    public static Coordenada[] getNextMovesAsTorre(Piece p){
-        Coordenada[] coordenadas = new Coordenada[0];
+    public static ListaSE getNextMovesAsTorre(Piece p){
+        ListaSE coordenadas = new ListaSE();
         Celda celda = p.getCelda();
         Tablero tablero = celda.getTablero();
         Color color = p.getColor();
@@ -37,44 +36,44 @@ public abstract class Torre extends Piece{
         //Up
         c = original.up();
         while(tablero.getCelda(c)!=null && tablero.getCelda(c).isEmpty()) {
-            coordenadas = Tool.add(coordenadas, c);
+            coordenadas.addTail(c);
             c = c.up();
         }
         if(tablero.getCelda(c)!=null && tablero.getCelda(c).getPiece().getColor()!=p.getColor())
-            coordenadas = Tool.add(coordenadas, c);
+            coordenadas.addTail(c);
 
         //Down
         c = original.down();
         while(tablero.getCelda(c)!=null && tablero.getCelda(c).isEmpty()) {
-            coordenadas = Tool.add(coordenadas, c);
+            coordenadas.addTail(c);
             c = c.down();
         }
         if(tablero.getCelda(c)!=null && tablero.getCelda(c).getPiece().getColor()!=p.getColor())
-            coordenadas = Tool.add(coordenadas, c);
+            coordenadas.addTail(c);
 
         //Left
         c = original.left();
         while(tablero.getCelda(c)!=null && tablero.getCelda(c).isEmpty()) {
-            coordenadas = Tool.add(coordenadas, c);
+            coordenadas.addTail(c);
             c = c.left();
         }
         if(tablero.getCelda(c)!=null && tablero.getCelda(c).getPiece().getColor()!=p.getColor())
-            coordenadas = Tool.add(coordenadas, c);
+            coordenadas.addTail(c);
 
         //Right
         c = original.right();
         while(tablero.getCelda(c)!=null && tablero.getCelda(c).isEmpty()) {
-            coordenadas = Tool.add(coordenadas, c);
+            coordenadas.addTail(c);
             c = c.right();
         }
         if(tablero.getCelda(c)!=null && tablero.getCelda(c).getPiece().getColor()!=p.getColor())
-            coordenadas = Tool.add(coordenadas, c);
+            coordenadas.addTail(c);
 
         return coordenadas;
     }
 
     @Override
-    public Coordenada[] getNextMoves(){
+    public ListaSE getNextMoves(){
         return getNextMovesAsTorre(this);
     }
 

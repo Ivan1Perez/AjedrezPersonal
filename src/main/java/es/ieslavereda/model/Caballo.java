@@ -5,16 +5,15 @@ import es.ieslavereda.Tool;
 
 public abstract class Caballo extends Piece{
 
-    private Coordenada[] coordenadas;
-    private ListaSE lista;
+    private ListaSE coordenadas;
 
     public Caballo(PieceType pieceType, Celda celda){
         super(pieceType, celda);
     }
 
     @Override
-    public Coordenada[] getNextMoves() {
-        coordenadas = new Coordenada[0];
+    public ListaSE getNextMoves() {
+        coordenadas = new ListaSE();
         Coordenada position = getCelda().getCoordenada();
         Coordenada c;
 
@@ -51,9 +50,9 @@ public abstract class Caballo extends Piece{
 
         if(tablero.getCelda(c)!=null){
             if(tablero.getCelda(c).isEmpty())
-                coordenadas = Tool.add(coordenadas,c);
+                coordenadas.addTail(c);
             else if (tablero.getCelda(c).getPiece().getColor()!=getColor())
-                coordenadas = Tool.add(coordenadas, c);
+                coordenadas.addTail(c);
         }
     }
 

@@ -1,5 +1,6 @@
 package es.ieslavereda;
 //prueba ajedrez personal
+import es.ieslavereda.TAD.ListaSE;
 import es.ieslavereda.model.*;
 
 //Check
@@ -33,12 +34,12 @@ public class Main {
         //Movemos la torre a propósito para comprobar que el método de enroque funciona correctamente
         t.getCelda(new Coordenada('H', 1)).getPiece().moveTo(new Coordenada('H', 5));
 
-        Coordenada[] coordenadas = t.getCelda(new Coordenada('E',1)).getPiece().getNextMoves();
+        ListaSE coordenadas = t.getCelda(new Coordenada('E',1)).getPiece().getNextMoves();
         t.highlight(coordenadas);
         System.out.println(t);
         t.highlight(coordenadas);
 //
-        for(Coordenada c : coordenadas) {
+        for(Coordenada c : coordenadas.toArray()) {
             System.out.print(c + " ");
         }
     }

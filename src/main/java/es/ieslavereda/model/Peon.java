@@ -6,7 +6,7 @@ import es.ieslavereda.Tool;
 
 public abstract class Peon extends Piece{
 
-    private Coordenada[] coordenadas;
+    private ListaSE coordenadas;
     private boolean moved;
 
     public Peon(PieceType pieceType, Celda celda){
@@ -34,7 +34,7 @@ public abstract class Peon extends Piece{
 
     @Override
     public ListaSE getNextMoves() {
-        coordenadas = new Coordenada[0];
+        coordenadas = new ListaSE();
         Coordenada position = getCelda().getCoordenada();
         Coordenada c;
         boolean sameCol;
@@ -92,10 +92,10 @@ public abstract class Peon extends Piece{
         if(tablero.getCelda(c)!=null){
             if(sameCol) {
                 if (tablero.getCelda(c).isEmpty())
-                    coordenadas = Tool.add(coordenadas, c);
+                    coordenadas.addTail(c);
             }else {
                 if (!tablero.getCelda(c).isEmpty() && tablero.getCelda(c).getPiece().getColor() != getColor())
-                    coordenadas = Tool.add(coordenadas, c);
+                    coordenadas.addTail(c);
             }
         }
     }

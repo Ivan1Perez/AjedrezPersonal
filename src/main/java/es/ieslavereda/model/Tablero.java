@@ -1,5 +1,7 @@
 package es.ieslavereda.model;
 
+import es.ieslavereda.TAD.ListaSE;
+
 public class Tablero {
 
     private Celda[][] celdas;
@@ -47,8 +49,9 @@ public class Tablero {
         new TorreBlanca(getCelda(new Coordenada('H',8)));
     }
 
-    public void highlight(Coordenada[] coordenadas){
-        for (Coordenada c : coordenadas)
+    public void highlight(ListaSE coordenadas){
+
+        for (Coordenada c : coordenadas.toArray())
             getCelda(c).highlight();
     }
 
