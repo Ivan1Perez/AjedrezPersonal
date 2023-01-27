@@ -90,8 +90,15 @@ public class Rey extends Piece{
         aux.addTail(c.left().left().left());
         aux.addTail(c.left().left().left().left());
 
-        while(tablero.getCelda(aux.get(i)).isEmpty() && i < aux.size()){
+        while(tablero.getCelda(aux.get(i)).isEmpty() && i < aux.size()-1){
             i++;
+        }
+
+        //Si 'i' llega a la posición de la Lista anterior a donde está ubicada la Torre (3) avanzaremos al siguiente paso
+        if(i==3){
+            if(!tablero.getCelda(aux.get(aux.size()-1)).getPiece().hasMoved()){
+                coordenadas.addTail(c.left().left());
+            }
         }
 //        Coordenada[] checkEnroqueLargo = {
 //                c.left(),
