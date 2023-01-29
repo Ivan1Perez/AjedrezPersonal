@@ -31,7 +31,7 @@ public class Tablero {
 //        new CaballoNegro(getCelda(new Coordenada('B',1)));
 //        new AlfilNegro(getCelda(new Coordenada('C',1)));
         new ReyNegro(getCelda(new Coordenada('E',1)));
-//        new ReinaNegra(getCelda(new Coordenada('D',1)));
+        new ReinaNegra(getCelda(new Coordenada('D',1)));
 //        new AlfilNegro(getCelda(new Coordenada('F',1)));
 //        new CaballoNegro(getCelda(new Coordenada('G',1)));
         new TorreNegra(getCelda(new Coordenada('H', 1)));

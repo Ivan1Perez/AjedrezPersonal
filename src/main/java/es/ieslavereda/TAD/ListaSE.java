@@ -126,44 +126,40 @@ public class ListaSE {
         Node aux = l.cabeza;
         int originalSize = l.size;
 
-        for(int i = 0 ; i < originalSize ; i++, aux = aux.getNext()){
+        for(int i = 0 ; i < originalSize ; i++, aux = aux.getNext()) {
             addTail(aux.getInfo());
         }
-
         return this;
     }
 
-    @Override
-    public boolean equals(Object obj){
-        if(obj instanceof ListaSE){
-            ListaSE l = (ListaSE) obj;
-            if(l.size!=size)
-                return false;
-
-            boolean encontrado = false;
-            Node aux = cabeza;
-            Node aux2 = l.cabeza;
-            while (aux!=null && !encontrado){
-                if(!aux.equals(aux2))
-                    encontrado=true;
-
-                aux = aux.getNext();
-                aux2 = aux2.getNext();
-            }
-
-            return !encontrado;
-        }
-
-        return false;
-    }
+//    @Override
+//    public boolean equals(Object obj){
+//        if(obj instanceof ListaSE){
+//            ListaSE l = (ListaSE) obj;
+//            if(l.size!=size)
+//                return false;
+//
+//            boolean encontrado = false;
+//            Node aux = cabeza;
+//            Node aux2 = l.cabeza;
+//            while (aux!=null && !encontrado){
+//                if(!aux.equals(aux2))
+//                    encontrado=true;
+//
+//                aux = aux.getNext();
+//                aux2 = aux2.getNext();
+//            }
+//
+//            return !encontrado;
+//        }
+//
+//        return false;
+//    }
 
 
     @Override
     public String toString() {
-        return "Lista{" +
-                "size=" + size +
-                ", valores = " + cabeza +
-                '}';
+            return "{ size: "+size +", Values: " +((cabeza==null)?"}":cabeza.toString());
     }
 
 }
