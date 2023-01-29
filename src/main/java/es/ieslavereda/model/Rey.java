@@ -96,28 +96,31 @@ public class Rey extends Piece{
 
         //Si 'i' llega a la posición de la Lista anterior a donde está ubicada la Torre (3) avanzaremos al siguiente paso
         if(i==3){
-            if(!tablero.getCelda(aux.get(aux.size()-1)).getPiece().hasMoved()){
+            if(!tablero.getCelda(aux.get(aux.size()-1)).isEmpty() && !tablero.getCelda(aux.get(aux.size()-1)).getPiece().hasMoved()){
                 coordenadas.addTail(c.left().left());
             }
         }
 
-//
-//        i = 0;
-//        //Enroque corto
-//        Coordenada[] checkEnroqueCorto = {
-//                c.right(),
-//                c.right().right(),
-//                c.right().right().right()
-//        };
-//
-//        if(!tablero.getCelda(checkEnroqueCorto[2]).isEmpty() && !tablero.getCelda(checkEnroqueCorto[2]).getPiece().hasMoved()) {
-//            while (i < checkEnroqueCorto.length - 1 && tablero.getCelda(checkEnroqueCorto[i]).isEmpty()) {
-//                i++;
-//            }
-//            //Si las 3 casillas del enroque largo están vacías se añadirá la coordenada.
-//            if(i==2)
-//                coordenadas = Tool.add(coordenadas, c.right().right());
-//        }
+//----------------------------------------------------------------------------------------------------------------------
+
+        //Enroque corto
+        i = 0;
+
+        aux = new ListaSE();
+
+        aux.addTail(c.right());
+        aux.addTail(c.right().right());
+        aux.addTail(c.right().right().right());
+
+        while(tablero.getCelda(aux.get(i)).isEmpty() && i < aux.size()-1){
+            i++;
+        }
+
+        if(i==2){
+            if(!tablero.getCelda(aux.get(aux.size()-1)).isEmpty() && !tablero.getCelda(aux.get(aux.size()-1)).getPiece().hasMoved()){
+                coordenadas.addTail(c.right().right());
+            }
+        }
     }
 
 }
