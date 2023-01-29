@@ -12,8 +12,13 @@ public class DeletePieceManager implements IDeletePieceManager{
         return 0;
     }
 
+//    @Override
+//    public Piece getLast() {
+//        return null;
+//    }
+
     @Override
-    public Piece getLast() {
+    public Piece removeLast() {
         return null;
     }
 }

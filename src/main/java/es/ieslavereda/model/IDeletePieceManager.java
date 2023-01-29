@@ -4,6 +4,7 @@ public interface IDeletePieceManager {
 
     void add(Piece piece);
     int count(Piece.PieceType pieceType);
-    Piece getLast();
+//    Piece getLast();
+    Piece removeLast();
 
 }
