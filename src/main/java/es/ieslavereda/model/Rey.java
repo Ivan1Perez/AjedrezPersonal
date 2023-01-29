@@ -100,21 +100,7 @@ public class Rey extends Piece{
                 coordenadas.addTail(c.left().left());
             }
         }
-//        Coordenada[] checkEnroqueLargo = {
-//                c.left(),
-//                c.left().left(),
-//                c.left().left().left(),
-//                c.left().left().left().left()
-//        };
-//
-//        if(!tablero.getCelda(checkEnroqueLargo[3]).isEmpty() && !tablero.getCelda(checkEnroqueLargo[3]).getPiece().hasMoved()) {
-//            while (i < checkEnroqueLargo.length - 1 && tablero.getCelda(checkEnroqueLargo[i]).isEmpty()) {
-//                i++;
-//            }
-//            //Si las 3 casillas del enroque largo están vacías se añadirá la coordenada.
-//            if(i==3)
-//                coordenadas = Tool.add(coordenadas, c.left().left());
-//        }
+
 //
 //        i = 0;
 //        //Enroque corto

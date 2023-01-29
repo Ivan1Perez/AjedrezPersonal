@@ -12,11 +12,11 @@ public abstract class Reina extends Piece{
     @Override
     public ListaSE getNextMoves() {
 
-        ListaSE coordinates1 = Torre.getNextMovesAsTorre(this);
-        ListaSE coordinates2 = Alfil.getNextMovesAsAlfil(this);
+        ListaSE coordTorre = Torre.getNextMovesAsTorre(this);
+        ListaSE coordAlfil = Alfil.getNextMovesAsAlfil(this);
 
 
-        return coordinates1.addAll(coordinates2);
+        return coordTorre.addAll(coordAlfil);
     }
 
 }

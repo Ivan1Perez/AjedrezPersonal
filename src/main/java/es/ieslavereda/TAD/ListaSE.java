@@ -123,18 +123,14 @@ public class ListaSE {
 
     public ListaSE addAll(ListaSE l){
 
-        boolean modificado = false;
         Node aux = l.cabeza;
-        int i = size;
+        int originalSize = l.size;
 
-        while(aux!=null){
-            modificado=true;
+        for(int i = 0 ; i < originalSize ; i++, aux = aux.getNext()){
             addTail(aux.getInfo());
-            aux=aux.getNext();
-            i--;
         }
 
-        return l;
+        return this;
     }
 
     @Override
