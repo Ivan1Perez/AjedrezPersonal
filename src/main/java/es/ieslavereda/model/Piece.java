@@ -51,6 +51,7 @@ public abstract class Piece {
         return shape;
     }
 
+
     public void putInYourPlace(){
         celda.setPiece(this);
     }

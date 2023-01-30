@@ -58,5 +58,6 @@ public class Main {
         for(Coordenada c : coordenadas.toArray()) {
             System.out.print(c + " ");
         }
+
     }
 }

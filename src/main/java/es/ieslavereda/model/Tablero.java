@@ -5,9 +5,28 @@ import es.ieslavereda.TAD.ListaSE;
 public class Tablero {
 
     private Celda[][] celdas;
+    private IDeletePieceManager deletePieceManager;
     private Piece piece;
 
     public Tablero(){
+
+        deletePieceManager = new IDeletePieceManager() {
+            @Override
+            public void add(Piece piece) {
+
+            }
+
+            @Override
+            public int count(Piece.PieceType pieceType) {
+                return 0;
+            }
+
+            @Override
+            public Piece removeLast() {
+                return null;
+            }
+        };
+
         celdas = new Celda[8][8];
 
         for(int row = 0; row <=7; row++){
