@@ -47,6 +47,10 @@ public abstract class Piece {
         return shape.color;
     }
 
+    public PieceType getShape() {
+        return shape;
+    }
+
     public void putInYourPlace(){
         celda.setPiece(this);
     }

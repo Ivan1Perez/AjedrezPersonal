@@ -45,6 +45,9 @@ public class Main {
 
         System.out.println("\n");
 
+        DeletePieceManager d = new DeletePieceManager();
+        d.add(t.getCelda(new Coordenada('F', 4)).getPiece());
+        System.out.println(d);
         t.getCelda(new Coordenada('E', 5)).getPiece().moveTo(new Coordenada('F', 4));
         t.resetColors();
         coordenadas = t.getCelda(new Coordenada('F',4)).getPiece().getNextMoves();
