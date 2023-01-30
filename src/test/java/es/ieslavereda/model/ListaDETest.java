@@ -51,32 +51,32 @@ class ListaDETest {
         });
     }
 
-//    @Test
-//    Piece removeHead(){
-//        ListaDE lista = new ListaDE();
-//        lista.addTail(new ReinaBlanca(new Celda(new Coordenada( 'a', 2),tablero)));
-//        lista.addTail(new ReinaNegra(new Celda(new Coordenada( 'b', 1),tablero)));
-//        lista.addTail(new TorreBlanca(new Celda(new Coordenada( 'c', 3),tablero)));
-//        lista.addTail(new TorreNegra(new Celda(new Coordenada( 'd', 4),tablero)));
-//
-//        assertDoesNotThrow(new Executable() {
-//            @Override
-//            public void execute() throws Throwable {
-//                System.out.println(lista);
-//                System.out.println(lista.toStringReverse());
-//                System.out.println(lista.removeHead());
-//                System.out.println(lista);
-//                System.out.println(lista.toStringReverse());
-//                System.out.println(lista.removeHead());
-//                System.out.println(lista);
-//                System.out.println(lista.toStringReverse());
-//                System.out.println(lista.removeHead());
-//                System.out.println(lista);
-//                System.out.println(lista.toStringReverse());
-//                System.out.println(lista.removeHead());
-//            }
-//        });
-//    }
+    @Test
+    void removeHead(){
+        ListaDE lista = new ListaDE();
+        lista.addTail(new ReinaBlanca(new Celda(new Coordenada( 'a', 2),tablero)));
+        lista.addTail(new ReinaNegra(new Celda(new Coordenada( 'b', 1),tablero)));
+        lista.addTail(new TorreBlanca(new Celda(new Coordenada( 'c', 3),tablero)));
+        lista.addTail(new TorreNegra(new Celda(new Coordenada( 'd', 4),tablero)));
+
+        assertDoesNotThrow(new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                System.out.println(lista);
+                System.out.println(lista.toStringReverse());
+                System.out.println(lista.removeHead());
+                System.out.println(lista);
+                System.out.println(lista.toStringReverse());
+                System.out.println(lista.removeHead());
+                System.out.println(lista);
+                System.out.println(lista.toStringReverse());
+                System.out.println(lista.removeHead());
+                System.out.println(lista);
+                System.out.println(lista.toStringReverse());
+                System.out.println(lista.removeHead());
+            }
+        });
+    }
 
 
 }

@@ -5,34 +5,26 @@ import es.ieslavereda.TAD.ListaSE;
 public class Tablero {
 
     private Celda[][] celdas;
+    private Celda[] fichasEliminadas;
     private IDeletePieceManager deletePieceManager;
     private Piece piece;
 
     public Tablero(){
 
-        deletePieceManager = new IDeletePieceManager() {
-            @Override
-            public void add(Piece piece) {
-
-            }
-
-            @Override
-            public int count(Piece.PieceType pieceType) {
-                return 0;
-            }
-
-            @Override
-            public Piece removeLast() {
-                return null;
-            }
-        };
+        this.deletePieceManager = new DeletePieceManager();
 
         celdas = new Celda[8][8];
+
+        fichasEliminadas = new Celda[12];
 
         for(int row = 0; row <=7; row++){
             for(int col=0; col<=7; col++){
                 celdas[row][col] = new Celda(new Coordenada((char)('A'+col),row+1),this);
             }
+        }
+
+        for(int i = 0 ; i <= 12 ; i++){
+            fichasEliminadas[i] = new Celda(new Coordenada((char)('A'+i),i+1),this);
         }
 
     }
@@ -43,6 +35,11 @@ public class Tablero {
         if(coordenada.getCol()<'A' || coordenada.getCol()>'H')
             return null;
         return celdas[coordenada.getFila()-1][coordenada.getCol()-'A'];
+    }
+
+    public Celda getCeldaEliminadas(Coordenada coordenada){
+
+        return fichasEliminadas[coordenada.getFila()];
     }
 
     public void placePieces(){
@@ -89,7 +86,13 @@ public class Tablero {
                 output += celdas[row][col];
             output +=" "+(row+1)+"\n";
         }
-        output += "   A  B  C  D  E  F  G  H";
+        output += "   A  B  C  D  E  F  G  H\n";
+
+        for(int i = 0 ; i <= 12 ; i++){
+            output += getCeldaEliminadas(fichasEliminadas[i].getCoordenada());
+        }
+
+        output += "\n" + deletePieceManager.toString();
 
         return output;
     }

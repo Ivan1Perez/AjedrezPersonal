@@ -4,19 +4,20 @@ import es.ieslavereda.TAD.ListaSE;
 
 public class DeletePieceManager implements IDeletePieceManager{
 
-    private Piece.PieceType shape;
+    private ListaDE pieces;
+
+    public DeletePieceManager(){
+        pieces = new ListaDE();
+    }
 
     @Override
     public void add (Piece piece) {
-        ListaSE pieces = new ListaSE();
-
-        pieces.addTail(piece.getCelda().getCoordenada());
-        this.shape = piece.getShape();
+        pieces.addHead(piece);
     }
 
     @Override
     public int count(Piece.PieceType pieceType) {
-        return 0;
+        return pieces.count(pieceType);
     }
 
 //    @Override
@@ -26,12 +27,11 @@ public class DeletePieceManager implements IDeletePieceManager{
 
     @Override
     public Piece removeLast() {
-        return null;
+        return pieces.removeHead();
     }
 
     @Override
-    public String toString(){
-        return "Piezas eliminadas: " + shape;
+    public String toString() {
+        return "Pieza eliminada: " + pieces;
     }
-
 }
