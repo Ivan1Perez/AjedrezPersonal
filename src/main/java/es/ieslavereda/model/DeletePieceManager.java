@@ -5,6 +5,7 @@ import es.ieslavereda.TAD.ListaSE;
 public class DeletePieceManager implements IDeletePieceManager{
 
     private Piece.PieceType shape;
+
     @Override
     public void add (Piece piece) {
         ListaSE pieces = new ListaSE();
