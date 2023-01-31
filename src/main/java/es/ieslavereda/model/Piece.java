@@ -65,21 +65,22 @@ public abstract class Piece {
     public abstract ListaSE getNextMoves();
 
      enum PieceType {
-
+        BLACK_TORRE('♜', Color.BLACK),
         BLACK_CABALLO ('♞', Color.BLACK),
         BLACK_ALFIL ('♝', Color.BLACK),
-        BLACK_PEON('♟', Color.BLACK),
         BLACK_REINA('♛', Color.BLACK),
         BLACK_REY('♚', Color.BLACK),
-        BLACK_TORRE('♜', Color.BLACK),
+        BLACK_PEON('♟', Color.BLACK),
+
+        WHITE_TORRE('♜', Color.WHITE),
         WHITE_CABALLO ('♞', Color.WHITE),
         WHITE_ALFIL ('♝', Color.WHITE),
-        WHITE_PEON('♟', Color.WHITE),
         WHITE_REINA('♛', Color.WHITE),
         WHITE_REY('♚', Color.WHITE),
-        WHITE_TORRE('♜', Color.WHITE);
+        WHITE_PEON('♟', Color.WHITE);
 
-        private char shape;
+
+         private char shape;
         private Color color;
 
         PieceType(char shape,  Color color){
@@ -91,7 +92,11 @@ public abstract class Piece {
             return shape;
         }
 
-        @Override
+         public Color getColor() {
+             return color;
+         }
+
+         @Override
         public String toString(){
             return shape + "";
         }

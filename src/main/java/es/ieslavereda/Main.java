@@ -8,53 +8,48 @@ import es.ieslavereda.model.*;
 public class Main {
     public static void main(String[] args) {
 
-//        for(Piece.PieceType pieceType : Piece.PieceType.values())
-//            System.out.println(new Piece(pieceType));
+        System.out.println("¿Empezar partida? [Y|N]");
+        Entrada e = new Entrada();
+        new Partida(e.getEmpezar());
 
-        Tablero t = new Tablero();
-        t.placePieces();
 
-//        t.getCelda(new Coordenada('C', 5)).getPiece().moveTo(new Coordenada('E', 3));
-        System.out.println(t);
 
-//        Coordenada[] coordenadas = t.getCelda(new Coordenada('D',7)).getPiece().getNextMoves();
+
+
+//        Tablero t = new Tablero();
+//        t.placePieces();
+//
+//        System.out.println(t);
+//
+//        t.getCelda(new Coordenada('D', 7)).getPiece().moveTo(new Coordenada('D', 5));
+//        t.getCelda(new Coordenada('D', 2)).getPiece().moveTo(new Coordenada('D', 4));
+//        t.getCelda(new Coordenada('E', 2)).getPiece().moveTo(new Coordenada('E', 3));
+//        t.getCelda(new Coordenada('F', 2)).getPiece().moveTo(new Coordenada('F', 4));
+//        t.getCelda(new Coordenada('E', 7)).getPiece().moveTo(new Coordenada('E', 5));
+//        t.getCelda(new Coordenada('H', 1)).getPiece().moveTo(new Coordenada('H', 5));
+//
+//
+//        ListaSE coordenadas = t.getCelda(new Coordenada('E',5)).getPiece().getNextMoves();
 //        t.highlight(coordenadas);
 //        System.out.println(t);
-//        t.highlight(coordenadas);
 //
-//        for(Coordenada c : coordenadas) {
+//        System.out.print("Coordenadas: ");
+//        for(Coordenada c : coordenadas.toArray()) {
 //            System.out.print(c + " ");
 //        }
-
-        t.getCelda(new Coordenada('D', 7)).getPiece().moveTo(new Coordenada('D', 5));
-        t.getCelda(new Coordenada('D', 2)).getPiece().moveTo(new Coordenada('D', 4));
-        t.getCelda(new Coordenada('E', 2)).getPiece().moveTo(new Coordenada('E', 3));
-        t.getCelda(new Coordenada('F', 2)).getPiece().moveTo(new Coordenada('F', 4));
-        t.getCelda(new Coordenada('E', 7)).getPiece().moveTo(new Coordenada('E', 5));
-        t.getCelda(new Coordenada('H', 1)).getPiece().moveTo(new Coordenada('H', 5));
-
-
-        ListaSE coordenadas = t.getCelda(new Coordenada('E',5)).getPiece().getNextMoves();
-        t.highlight(coordenadas);
-        System.out.println(t);
-
-        System.out.print("Coordenadas: ");
-        for(Coordenada c : coordenadas.toArray()) {
-            System.out.print(c + " ");
-        }
-
-        System.out.println("\n");
-
-        t.getCelda(new Coordenada('E', 5)).getPiece().moveTo(new Coordenada('F', 4));
-        t.resetColors();
-        coordenadas = t.getCelda(new Coordenada('F',4)).getPiece().getNextMoves();
-        t.highlight(coordenadas);
-        System.out.println(t);
-
-        System.out.print("Coordenadas: ");
-        for(Coordenada c : coordenadas.toArray()) {
-            System.out.print(c + " ");
-        }
+//
+//        System.out.println("\n");
+//
+//        t.getCelda(new Coordenada('E', 5)).getPiece().moveTo(new Coordenada('F', 4));
+//        t.resetColors();
+//        coordenadas = t.getCelda(new Coordenada('F',4)).getPiece().getNextMoves();
+//        t.highlight(coordenadas);
+//        System.out.println(t);
+//
+//        System.out.print("Coordenadas: ");
+//        for(Coordenada c : coordenadas.toArray()) {
+//            System.out.print(c + " ");
+//        }
 
     }
 }

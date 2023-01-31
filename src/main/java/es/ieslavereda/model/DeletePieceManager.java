@@ -1,6 +1,6 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.TAD.ListaSE;
+import static com.diogonunes.jcolor.Ansi.colorize;
 
 public class DeletePieceManager implements IDeletePieceManager{
 
@@ -32,6 +32,16 @@ public class DeletePieceManager implements IDeletePieceManager{
 
     @Override
     public String toString() {
-        return "Pieza eliminada: " + pieces;
+        String output="";
+
+        for (Piece.PieceType pieceType : Piece.PieceType.values())
+            output += colorize(" " + pieceType.getShape() + " ", pieceType.getColor().getAttribute(), Celda.ColorCelda.BLACK_CELL.getAttribute());
+
+        output+="\n";
+
+        for(Piece.PieceType pieceType : Piece.PieceType.values())
+            output += colorize(" " + pieces.count(pieceType) + " ", pieceType.getColor().getAttribute(), Celda.ColorCelda.WHITE_CELL.getAttribute());
+
+        return output;
     }
 }
