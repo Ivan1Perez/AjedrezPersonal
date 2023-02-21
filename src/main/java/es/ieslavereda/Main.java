@@ -8,19 +8,14 @@ import es.ieslavereda.model.*;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("¿Empezar partida? [Y|N]");
-        Entrada e = new Entrada();
-        new Partida(e.getEmpezar());
+//        new Partida();
 
 
+        Tablero t = new Tablero();
+        t.placePieces();
 
+        System.out.println(t);
 
-
-//        Tablero t = new Tablero();
-//        t.placePieces();
-//
-//        System.out.println(t);
-//
 //        t.getCelda(new Coordenada('D', 7)).getPiece().moveTo(new Coordenada('D', 5));
 //        t.getCelda(new Coordenada('D', 2)).getPiece().moveTo(new Coordenada('D', 4));
 //        t.getCelda(new Coordenada('E', 2)).getPiece().moveTo(new Coordenada('E', 3));

@@ -32,24 +32,24 @@ public class Tablero {
 
     public void placePieces(){
         new TorreNegra(getCelda(new Coordenada('A', 1)));
-//        new CaballoNegro(getCelda(new Coordenada('B',1)));
-//        new AlfilNegro(getCelda(new Coordenada('C',1)));
+        new CaballoNegro(getCelda(new Coordenada('B',1)));
+        new AlfilNegro(getCelda(new Coordenada('C',1)));
         new ReyNegro(getCelda(new Coordenada('E',1)));
-//        new ReinaNegra(getCelda(new Coordenada('D',1)));
-//        new AlfilNegro(getCelda(new Coordenada('F',1)));
-//        new CaballoNegro(getCelda(new Coordenada('G',1)));
+        new ReinaNegra(getCelda(new Coordenada('D',1)));
+        new AlfilNegro(getCelda(new Coordenada('F',1)));
+        new CaballoNegro(getCelda(new Coordenada('G',1)));
         new TorreNegra(getCelda(new Coordenada('H', 1)));
         for(int i = 0 ; i < 8 ; i++){
             new PeonNegro(getCelda(new Coordenada(((char)('A'+ i)), 2)));
             new PeonBlanco(getCelda(new Coordenada(((char)('H'- i)), 7)));
         }
         new TorreBlanca(getCelda(new Coordenada('A',8)));
-//        new CaballoBlanco(getCelda(new Coordenada('B',8)));
-//        new AlfilBlanco(getCelda(new Coordenada('C', 8)));
-//        new ReinaBlanca(getCelda(new Coordenada('D',8)));
+        new CaballoBlanco(getCelda(new Coordenada('B',8)));
+        new AlfilBlanco(getCelda(new Coordenada('C', 8)));
+        new ReinaBlanca(getCelda(new Coordenada('D',8)));
         new ReyBlanco(getCelda(new Coordenada('E', 8)));
-//        new AlfilBlanco(getCelda(new Coordenada('F', 8)));
-//        new CaballoBlanco(getCelda(new Coordenada('G',8)));
+        new AlfilBlanco(getCelda(new Coordenada('F', 8)));
+        new CaballoBlanco(getCelda(new Coordenada('G',8)));
         new TorreBlanca(getCelda(new Coordenada('H',8)));
     }
 
@@ -76,7 +76,11 @@ public class Tablero {
         }
         output += "   A  B  C  D  E  F  G  H\n";
 
-        output += "\n\n" + deletePieceManager.toString();
+        output += "\n\t\t REMAINING PIECES";
+        output += "\n" + deletePieceManager.toString() + "\n";
+
+        output += "\n\t\t DELETED PIECES";
+        output += "\n" + deletePieceManager.toString();
 
         return output;
     }
