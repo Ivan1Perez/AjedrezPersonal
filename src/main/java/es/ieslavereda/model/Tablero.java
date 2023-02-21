@@ -17,6 +17,7 @@ public class Tablero {
         for(int row = 0; row <=7; row++){
             for(int col=0; col<=7; col++){
                 celdas[row][col] = new Celda(new Coordenada((char)('A'+col),row+1),this);
+
             }
         }
 
