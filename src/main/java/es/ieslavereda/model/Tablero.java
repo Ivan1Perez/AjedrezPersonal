@@ -2,15 +2,20 @@ package es.ieslavereda.model;
 
 import es.ieslavereda.TAD.ListaSE;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class Tablero {
 
     private Celda[][] celdas;
     private IDeletePieceManager deletePieceManager;
-    private Piece piece;
+
+    private Map<Coordenada, Celda> mapaCeldas;
 
     public Tablero(){
 
         this.deletePieceManager = new DeletePieceManagerStandar();
+        mapaCeldas = new LinkedHashMap<>();
 
         celdas = new Celda[8][8];
 

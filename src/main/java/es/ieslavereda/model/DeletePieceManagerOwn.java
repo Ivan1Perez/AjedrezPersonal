@@ -4,7 +4,11 @@ import static com.diogonunes.jcolor.Ansi.colorize;
 
 public class DeletePieceManagerOwn implements IDeletePieceManager{
 
-    ListaDE<Piece> pieces;
+    private ListaDE<Piece> pieces;
+
+    public DeletePieceManagerOwn() {
+        pieces = new ListaDE<>();
+    }
 
     @Override
     public void add (Piece piece) {
@@ -13,7 +17,16 @@ public class DeletePieceManagerOwn implements IDeletePieceManager{
 
     @Override
     public int count(Piece.PieceType pieceType){
-        return pieces.count(pieceType);
+
+        int count = 0;
+
+        for (int i = 0 ; i < pieces.getSize() ; i++){
+            if(pieces.get(i).getShape()==pieceType){
+                count++;
+            }
+        }
+
+        return count;
     }
 
     @Override
@@ -31,7 +44,7 @@ public class DeletePieceManagerOwn implements IDeletePieceManager{
         output+="\n";
 
         for(Piece.PieceType pieceType : Piece.PieceType.values())
-            output += colorize(" " + pieces.count(pieceType) + " ", pieceType.getColor().getAttribute(), Celda.ColorCelda.WHITE_CELL.getAttribute());
+            output += colorize(" " + count(pieceType) + " ", pieceType.getColor().getAttribute(), Celda.ColorCelda.WHITE_CELL.getAttribute());
 
         return output;
     }

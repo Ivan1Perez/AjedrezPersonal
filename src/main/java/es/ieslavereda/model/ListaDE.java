@@ -3,8 +3,8 @@ package es.ieslavereda.model;
 public class ListaDE<T> {
 
     private int size;
-    private Node head;
-    private Node tail;
+    private Node<T> head;
+    private Node<T> tail;
 
     public ListaDE(){
 
@@ -14,8 +14,12 @@ public class ListaDE<T> {
 
     }
 
-    public void addHead(Piece piece){
-        Node node = new Node(piece);
+    public int getSize() {
+        return size;
+    }
+
+    public void addHead(T info){
+        Node<T> node = new Node<>(info);
 
         if(head==null){
             head = node;
@@ -28,8 +32,8 @@ public class ListaDE<T> {
         size++;
     }
 
-    public void addTail(Piece piece){
-        Node node = new Node(piece);
+    public void addTail(T info){
+        Node<T> node = new Node<>(info);
 
         if(head==null){
             head = node;
@@ -42,8 +46,8 @@ public class ListaDE<T> {
         size++;
     }
 
-    public Piece removeHead(){
-        Piece piece = head.getInfo();
+    public T removeHead(){
+        T info = head.getInfo();
 
         if(head==null){
             return null;
@@ -58,11 +62,11 @@ public class ListaDE<T> {
 
         size--;
 
-        return piece;
+        return info;
     }
 
-    public Piece removeTail(){
-        Piece piece = tail.getInfo();
+    public T removeTail(){
+        T info = tail.getInfo();
 
         if(tail==null){
             return null;
@@ -77,28 +81,40 @@ public class ListaDE<T> {
 
         size--;
 
-        return piece;
+        return info;
     }
 
+//    public int count(Piece.PieceType pieceType){
+//        Node<T> aux = head;
+//        int count = 0;
+//
+//        while(aux!=null){
+//            if(aux.getInfo().getShape()==pieceType){
+//                count++;
+//            }
+//            aux = aux.getNext();
+//        }
+//
+//        return count;
+//    }
 
-    public int count(Piece.PieceType pieceType){
-        Node aux = head;
-        int count = 0;
+    public T get(int index){
+        if(index>=size || index<0)
+            return null;
 
-        while(aux!=null){
-            if(aux.getInfo().getShape()==pieceType){
-                count++;
-            }
-            aux = aux.getNext();
+        Node<T> aux = head;
+        while (index>0){
+            aux=aux.getNext();
+            index--;
         }
 
-        return count;
+        return aux.getInfo();
     }
 
     @Override
     public String toString() {
         String output = "ListaDE{ Size: " + size + ", Values: ";
-        Node aux = head;
+        Node<T> aux = head;
         while (aux!=null){
             output+=aux + " ";
             aux = aux.getNext();
@@ -109,7 +125,7 @@ public class ListaDE<T> {
 
     public String toStringReverse() {
         String output = "ListaDE{ Size: " + size + ", Values: ";
-        Node aux = tail;
+        Node<T> aux = tail;
         while (aux!=null){
             output+=aux + " ";
             aux = aux.getPrevious();
@@ -118,35 +134,35 @@ public class ListaDE<T> {
         return output +"}";
     }
 
-    class Node{
+     class Node<T>{
 
-        private Piece info;
-        private Node next;
-        private Node previous;
+        private final T info;
+        private Node<T> next;
+        private Node<T> previous;
 
-        public Node(Piece info) {
+        public Node(T info) {
 
             this.info = info;
 
         }
 
-        public Piece getInfo() {
+        public T getInfo() {
             return info;
         }
 
-        public Node getPrevious() {
+        public Node<T> getPrevious() {
             return previous;
         }
 
-        public Node getNext(){
+        public Node<T> getNext(){
             return next;
         }
 
-        public void setNext(Node next) {
+        public void setNext(Node<T> next) {
             this.next = next;
         }
 
-        public void setPrevious(Node previous) {
+        public void setPrevious(Node<T> previous) {
             this.previous = previous;
         }
 
