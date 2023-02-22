@@ -1,6 +1,6 @@
 package es.ieslavereda.model;
 
-public class ListaDE {
+public class ListaDE<T> {
 
     private int size;
     private Node head;

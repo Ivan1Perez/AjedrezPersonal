@@ -2,32 +2,23 @@ package es.ieslavereda.model;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 
-public class DeletePieceManager implements IDeletePieceManager{
+public class DeletePieceManagerOwn implements IDeletePieceManager{
 
-    private ListaDE pieces;
-
-    public DeletePieceManager(){
-        pieces = new ListaDE();
-    }
+    ListaDE<Piece> pieces;
 
     @Override
     public void add (Piece piece) {
-        pieces.addHead(piece);
+        pieces.addTail(piece);
     }
 
     @Override
-    public int count(Piece.PieceType pieceType) {
+    public int count(Piece.PieceType pieceType){
         return pieces.count(pieceType);
     }
 
-//    @Override
-//    public Piece getLast() {
-//        return null;
-//    }
-
     @Override
     public Piece removeLast() {
-        return pieces.removeHead();
+        return pieces.removeTail();
     }
 
     @Override
@@ -44,4 +35,5 @@ public class DeletePieceManager implements IDeletePieceManager{
 
         return output;
     }
+
 }

@@ -3,17 +3,20 @@ package es.ieslavereda.model;
 import es.ieslavereda.TAD.ListaSE;
 import es.ieslavereda.Tool;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class Caballo extends Piece{
 
-    private ListaSE coordenadas;
+    private Set<Coordenada> coordenadas;
 
     public Caballo(PieceType pieceType, Celda celda){
         super(pieceType, celda);
     }
 
     @Override
-    public ListaSE getNextMoves() {
-        coordenadas = new ListaSE();
+    public Set<Coordenada> getNextMoves() {
+        coordenadas = new HashSet<>();
         Coordenada position = getCelda().getCoordenada();
         Coordenada c;
 
@@ -50,9 +53,9 @@ public abstract class Caballo extends Piece{
 
         if(tablero.getCelda(c)!=null){
             if(tablero.getCelda(c).isEmpty())
-                coordenadas.addTail(c);
+                coordenadas.add(c);
             else if (tablero.getCelda(c).getPiece().getColor()!=getColor())
-                coordenadas.addTail(c);
+                coordenadas.add(c);
         }
     }
 

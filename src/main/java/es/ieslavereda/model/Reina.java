@@ -3,6 +3,9 @@ package es.ieslavereda.model;
 import es.ieslavereda.TAD.ListaSE;
 import es.ieslavereda.Tool;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class Reina extends Piece{
 
     public Reina(PieceType pieceType, Celda celda){
@@ -10,13 +13,15 @@ public abstract class Reina extends Piece{
     }
 
     @Override
-    public ListaSE getNextMoves() {
+    public Set<Coordenada> getNextMoves() {
+        Set<Coordenada> coordFinal = new HashSet<>();
 
-        ListaSE coordTorre = Torre.getNextMovesAsTorre(this);
-        ListaSE coordAlfil = Alfil.getNextMovesAsAlfil(this);
+        Set<Coordenada> coordTorre = Torre.getNextMovesAsTorre(this);
+        Set<Coordenada> coordAlfil = Alfil.getNextMovesAsAlfil(this);
 
-
-        return coordTorre.addAll(coordAlfil);
+        coordFinal.addAll(coordTorre);
+        coordFinal.addAll(coordAlfil);
+        return coordFinal;
     }
 
 }

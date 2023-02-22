@@ -5,6 +5,8 @@ import es.ieslavereda.TAD.Node;
 
 import com.diogonunes.jcolor.Attribute;
 
+import java.util.Set;
+
 import static com.diogonunes.jcolor.Ansi.colorize;
 
 
@@ -62,7 +64,7 @@ public abstract class Piece {
         return colorize(shape.toString(),shape.color.getAttribute(),celda.getColor().getAttribute());
     }
 
-    public abstract ListaSE getNextMoves();
+    public abstract Set<Coordenada> getNextMoves();
 
      enum PieceType {
         BLACK_TORRE('♜', Color.BLACK),

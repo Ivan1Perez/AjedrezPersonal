@@ -3,9 +3,12 @@ package es.ieslavereda.model;
 import es.ieslavereda.TAD.ListaSE;
 import es.ieslavereda.Tool;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Rey extends Piece{
 
-    private ListaSE coordenadas;
+    private Set<Coordenada> coordenadas;
     private boolean moved;
 
     public Rey(PieceType pieceType, Celda celda){
@@ -24,8 +27,8 @@ public class Rey extends Piece{
     }
 
     @Override
-    public ListaSE getNextMoves(){
-        coordenadas = new ListaSE();
+    public Set<Coordenada> getNextMoves(){
+        coordenadas = new HashSet<>();
         Coordenada position = getCelda().getCoordenada();
         Coordenada c;
 
@@ -72,9 +75,9 @@ public class Rey extends Piece{
 
         if(tablero.getCelda(c)!=null){
             if(tablero.getCelda(c).isEmpty())
-                coordenadas.addTail(c);
+                coordenadas.add(c);
             else if (tablero.getCelda(c).getPiece().getColor()!=getColor())
-                coordenadas.addTail(c);
+                coordenadas.add(c);
         }
 
     }
@@ -97,7 +100,7 @@ public class Rey extends Piece{
         //Si 'i' llega a la posición de la Lista anterior a donde está ubicada la Torre (3) avanzaremos al siguiente paso
         if(i==3){
             if(!tablero.getCelda(aux.get(aux.size()-1)).isEmpty() && !tablero.getCelda(aux.get(aux.size()-1)).getPiece().hasMoved()){
-                coordenadas.addTail(c.left().left());
+                coordenadas.add(c.left().left());
             }
         }
 
@@ -118,7 +121,7 @@ public class Rey extends Piece{
 
         if(i==2){
             if(!tablero.getCelda(aux.get(aux.size()-1)).isEmpty() && !tablero.getCelda(aux.get(aux.size()-1)).getPiece().hasMoved()){
-                coordenadas.addTail(c.right().right());
+                coordenadas.add(c.right().right());
             }
         }
     }

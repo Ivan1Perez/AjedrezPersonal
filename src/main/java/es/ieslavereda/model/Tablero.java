@@ -10,7 +10,7 @@ public class Tablero {
 
     public Tablero(){
 
-        this.deletePieceManager = new DeletePieceManager();
+        this.deletePieceManager = new DeletePieceManagerStandar();
 
         celdas = new Celda[8][8];
 

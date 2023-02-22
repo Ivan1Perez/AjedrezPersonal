@@ -4,9 +4,12 @@ import es.ieslavereda.TAD.ListaSE;
 import es.ieslavereda.TAD.Node;
 import es.ieslavereda.Tool;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class Peon extends Piece{
 
-    private ListaSE coordenadas;
+    private Set<Coordenada> coordenadas;
     private boolean moved;
 
     public Peon(PieceType pieceType, Celda celda){
@@ -33,8 +36,8 @@ public abstract class Peon extends Piece{
     public abstract void transform();
 
     @Override
-    public ListaSE getNextMoves() {
-        coordenadas = new ListaSE();
+    public Set<Coordenada> getNextMoves() {
+        coordenadas = new HashSet<>();
         Coordenada position = getCelda().getCoordenada();
         Coordenada c;
         boolean sameCol;
@@ -92,10 +95,10 @@ public abstract class Peon extends Piece{
         if(tablero.getCelda(c)!=null){
             if(sameCol) {
                 if (tablero.getCelda(c).isEmpty())
-                    coordenadas.addTail(c);
+                    coordenadas.add(c);
             }else {
                 if (!tablero.getCelda(c).isEmpty() && tablero.getCelda(c).getPiece().getColor() != getColor())
-                    coordenadas.addTail(c);
+                    coordenadas.add(c);
             }
         }
     }
