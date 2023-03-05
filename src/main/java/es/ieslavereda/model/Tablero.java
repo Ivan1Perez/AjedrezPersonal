@@ -2,22 +2,26 @@ package es.ieslavereda.model;
 
 import es.ieslavereda.TAD.ListaSE;
 
-public class Tablero {
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
-    private Celda[][] celdas;
+public class Tablero{
+
     private IDeletePieceManager deletePieceManager;
-    private Piece piece;
+    private Map<Coordenada, Celda> mapaTablero;
 
     public Tablero(){
 
         this.deletePieceManager = new DeletePieceManager();
-
-        celdas = new Celda[8][8];
+        mapaTablero = new LinkedHashMap<>();
+        Coordenada coordenada;
 
         for(int row = 0; row <=7; row++){
             for(int col=0; col<=7; col++){
-                celdas[row][col] = new Celda(new Coordenada((char)('A'+col),row+1),this);
-
+                coordenada = new Coordenada((char)('A'+col),row+1);
+                mapaTablero.put(coordenada, new Celda(coordenada,this));
             }
         }
 
@@ -28,7 +32,7 @@ public class Tablero {
             return null;
         if(coordenada.getCol()<'A' || coordenada.getCol()>'H')
             return null;
-        return celdas[coordenada.getFila()-1][coordenada.getCol()-'A'];
+        return mapaTablero.get(coordenada);
     }
 
     public void placePieces(){
@@ -61,9 +65,11 @@ public class Tablero {
     }
 
     public void resetColors(){
-        for (Celda[] row: celdas)
-            for(Celda c : row)
-                c.resetColor();
+        Collection<Celda> celdas = mapaTablero.values();
+
+        for (Celda celda : celdas) {
+            celda.resetColor();
+        }
     }
 
     @Override
@@ -71,8 +77,9 @@ public class Tablero {
         String output = "   A  B  C  D  E  F  G  H\n";
         for(int row = 0; row <=7; row++){
             output += (row+1)+" ";
-            for(int col=0; col<=7; col++)
-                output += celdas[row][col];
+            for(int col=0; col<=7; col++){
+                output += mapaTablero.get(new Coordenada((char)('A'+col), row+1));
+            }
             output +=" "+(row+1)+"\n";
         }
         output += "   A  B  C  D  E  F  G  H\n";

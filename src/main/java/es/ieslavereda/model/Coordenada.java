@@ -1,9 +1,12 @@
 package es.ieslavereda.model;
 
-public class Coordenada {
+public class Coordenada{
 
     private int fila;
     private char col;
+
+    public Coordenada() {
+    }
 
     public Coordenada(char col, int fila){
         this.col = Character.toUpperCase(col);
@@ -16,6 +19,14 @@ public class Coordenada {
 
     public char getCol() {
         return col;
+    }
+
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+
+    public void setCol(char col) {
+        this.col = Character.toUpperCase(col);
     }
 
     public Coordenada up(){
@@ -48,6 +59,11 @@ public class Coordenada {
 
     public Coordenada downLeft(){
         return down().left();
+    }
+
+    @Override
+    public int hashCode() {
+        return fila+col;
     }
 
     @Override
