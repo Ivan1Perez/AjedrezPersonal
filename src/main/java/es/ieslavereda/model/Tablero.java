@@ -14,7 +14,7 @@ public class Tablero{
 
     public Tablero(){
 
-        this.deletePieceManager = new DeletePieceManager();
+        this.deletePieceManager = new DeletePieceManagerOwn();
         mapaTablero = new LinkedHashMap<>();
         Coordenada coordenada;
 
