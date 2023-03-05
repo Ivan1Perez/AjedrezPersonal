@@ -1,23 +1,36 @@
 package es.ieslavereda.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.diogonunes.jcolor.Ansi.colorize;
 
-public class DeletePieceManager implements IDeletePieceManager{
+public class DeletePieceManagerStandar implements IDeletePieceManager{
 
-    private ListaDE pieces;
+    private List<Piece> pieces;
 
-    public DeletePieceManager(){
-        pieces = new ListaDE();
+    public DeletePieceManagerStandar(){
+        pieces = new ArrayList<>();
     }
 
     @Override
     public void add (Piece piece) {
-        pieces.addHead(piece);
+        pieces.add(piece);
     }
 
     @Override
     public int count(Piece.PieceType pieceType) {
-        return pieces.count(pieceType);
+
+        int count = 0;
+
+
+        for (int i = 0 ; i < pieces.size() ; i++){
+            if(pieces.get(i).getShape()==pieceType){
+                count++;
+            }
+        }
+
+        return count;
     }
 
 //    @Override
@@ -27,7 +40,7 @@ public class DeletePieceManager implements IDeletePieceManager{
 
     @Override
     public Piece removeLast() {
-        return pieces.removeHead();
+        return pieces.remove(pieces.size());
     }
 
     @Override
@@ -40,7 +53,7 @@ public class DeletePieceManager implements IDeletePieceManager{
         output+="\n";
 
         for(Piece.PieceType pieceType : Piece.PieceType.values())
-            output += colorize(" " + pieces.count(pieceType) + " ", pieceType.getColor().getAttribute(), Celda.ColorCelda.WHITE_CELL.getAttribute());
+            output += colorize(" " + count(pieceType) + " ", pieceType.getColor().getAttribute(), Celda.ColorCelda.WHITE_CELL.getAttribute());
 
         return output;
     }
