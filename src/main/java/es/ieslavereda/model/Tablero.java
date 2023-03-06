@@ -5,7 +5,6 @@ import es.ieslavereda.TAD.ListaSE;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Tablero{
 
@@ -35,28 +34,38 @@ public class Tablero{
         return mapaTablero.get(coordenada);
     }
 
-    public void placePieces(){
-        new TorreNegra(getCelda(new Coordenada('A', 1)));
-        new CaballoNegro(getCelda(new Coordenada('B',1)));
-        new AlfilNegro(getCelda(new Coordenada('C',1)));
-        new ReyNegro(getCelda(new Coordenada('E',1)));
-        new ReinaNegra(getCelda(new Coordenada('D',1)));
-        new AlfilNegro(getCelda(new Coordenada('F',1)));
-        new CaballoNegro(getCelda(new Coordenada('G',1)));
-        new TorreNegra(getCelda(new Coordenada('H', 1)));
-        for(int i = 0 ; i < 8 ; i++){
-            new PeonNegro(getCelda(new Coordenada(((char)('A'+ i)), 2)));
-            new PeonBlanco(getCelda(new Coordenada(((char)('H'- i)), 7)));
+    public void placePieces(Color color){
+        int whites = 8, blacks = 1, whitePawns = 7, blackPawns = 2;
+
+        if(color==Color.BLACK){
+            whites = 1;
+            blacks = 8;
+            whitePawns = 2;
+            blackPawns = 7;
         }
-        new TorreBlanca(getCelda(new Coordenada('A',8)));
-        new CaballoBlanco(getCelda(new Coordenada('B',8)));
-        new AlfilBlanco(getCelda(new Coordenada('C', 8)));
-        new ReinaBlanca(getCelda(new Coordenada('D',8)));
-        new ReyBlanco(getCelda(new Coordenada('E', 8)));
-        new AlfilBlanco(getCelda(new Coordenada('F', 8)));
-        new CaballoBlanco(getCelda(new Coordenada('G',8)));
-        new TorreBlanca(getCelda(new Coordenada('H',8)));
+
+        new TorreNegra(getCelda(new Coordenada('A', blacks)));
+        new CaballoNegro(getCelda(new Coordenada('B',blacks)));
+        new AlfilNegro(getCelda(new Coordenada('C',blacks)));
+        new ReyNegro(getCelda(new Coordenada('E',blacks)));
+        new ReinaNegra(getCelda(new Coordenada('D',blacks)));
+        new AlfilNegro(getCelda(new Coordenada('F',blacks)));
+        new CaballoNegro(getCelda(new Coordenada('G',blacks)));
+        new TorreNegra(getCelda(new Coordenada('H', blacks)));
+        for(int i = 0 ; i < 8 ; i++){
+            new PeonNegro(getCelda(new Coordenada(((char)('A'+ i)), blackPawns)));
+            new PeonBlanco(getCelda(new Coordenada(((char)('H'- i)), whitePawns)));
+        }
+        new TorreBlanca(getCelda(new Coordenada('A',whites)));
+        new CaballoBlanco(getCelda(new Coordenada('B',whites)));
+        new AlfilBlanco(getCelda(new Coordenada('C', whites)));
+        new ReinaBlanca(getCelda(new Coordenada('D',whites)));
+        new ReyBlanco(getCelda(new Coordenada('E', whites)));
+        new AlfilBlanco(getCelda(new Coordenada('F', whites)));
+        new CaballoBlanco(getCelda(new Coordenada('G',whites)));
+        new TorreBlanca(getCelda(new Coordenada('H',whites)));
     }
+
 
     public void highlight(ListaSE coordenadas){
 
@@ -84,10 +93,10 @@ public class Tablero{
         }
         output += "   A  B  C  D  E  F  G  H\n";
 
-        output += "\n\t\t REMAINING PIECES";
+        output += "\t\t REMAINING PIECES";
         output += "\n" + deletePieceManager.toString() + "\n";
 
-        output += "\n\t\t DELETED PIECES";
+        output += "\t\t DELETED PIECES";
         output += "\n" + deletePieceManager.toString();
 
         return output;
