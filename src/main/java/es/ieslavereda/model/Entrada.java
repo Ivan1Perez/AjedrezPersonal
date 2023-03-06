@@ -13,16 +13,20 @@ public class Entrada {
 
     }
 
-    public String getEmpezar(){
+    public boolean getEmpezar(){
         Scanner sc = new Scanner(System.in);
-        String respuesta = sc.nextLine();
+        String respuesta;
+        boolean correcto = false;
 
-        while(!respuesta.equalsIgnoreCase("Y") && !respuesta.equalsIgnoreCase("N")){
-            System.out.println("Wrong answer. Enter [Y] or [N]");
+        do{
             respuesta = sc.nextLine();
-        }
+            if(!respuesta.equalsIgnoreCase("Y") && !respuesta.equalsIgnoreCase("N"))
+                System.out.println("Wrong answer. Enter [Y] or [N]:");
+            else
+                correcto = true;
+        }while(!correcto);
 
-        return respuesta;
+        return respuesta.equalsIgnoreCase("y");
     }
 
     public Color chooseColor(){
@@ -62,8 +66,8 @@ public class Entrada {
             if(!correcto) {
                 example = "'" + (char) Tools.random(72, 65) + Tools.random(9, 1) + "'";
                 System.out.println("Error. You have to use the following format: " + example + "\n" +
-                        "Column from [A] to [H]\n" +
-                        "Row from [1] to [9]");
+                        "Column: from [A] to [H]\n" +
+                        "Row: from [1] to [9]");
             }
 
         }while(!correcto);
