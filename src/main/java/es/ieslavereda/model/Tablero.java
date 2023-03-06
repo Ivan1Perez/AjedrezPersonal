@@ -5,6 +5,7 @@ import es.ieslavereda.TAD.ListaSE;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Tablero{
 
@@ -67,9 +68,9 @@ public class Tablero{
     }
 
 
-    public void highlight(ListaSE coordenadas){
+    public void highlight(Set<Coordenada> coordenadas){
 
-        for (Coordenada c : coordenadas.toArray())
+        for (Coordenada c : coordenadas)
             getCelda(c).highlight();
     }
 

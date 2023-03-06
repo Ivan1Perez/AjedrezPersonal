@@ -45,8 +45,7 @@ public class Entrada {
 
     public Coordenada enterCoordenada(){
         Scanner sc = new Scanner(System.in);
-        Coordenada coordenada;
-        String respuesta;
+        String respuesta, example = "";
         String col;
         int row;
         boolean correcto = false;
@@ -54,19 +53,22 @@ public class Entrada {
         do {
             respuesta = sc.nextLine();
             col = String.valueOf(respuesta.charAt(0));
-            row = respuesta.charAt(1);
+            row = Integer.parseInt(String.valueOf(respuesta.charAt(1)));
 
             if (respuesta.length() == 2)
-                if(!(respuesta.toLowerCase().charAt(0)>'H' || respuesta.toLowerCase().charAt(0)<'A'))
-                    if (!(respuesta.charAt(1) > 8 || respuesta.charAt(1) < 1))
+                if(!(respuesta.toUpperCase().charAt(0)>'H' || respuesta.toUpperCase().charAt(0)<'A'))
+                    if (!(row > 8 || row < 1))
                         correcto = true;
-            else
-                System.out.println("Error. Just one letter and one number allowed. Please try again.");
+            if(!correcto) {
+                example = "'" + (char) Tools.random(72, 65) + Tools.random(9, 1) + "'";
+                System.out.println("Error. You have to use the following format: " + example + "\n" +
+                        "Column from [A] to [H]\n" +
+                        "Row from [1] to [9]");
+            }
 
         }while(!correcto);
 
-
-        return coordenada = new Coordenada(col.charAt(0), row);
+        return new Coordenada(col.charAt(0), row);
     }
 
 

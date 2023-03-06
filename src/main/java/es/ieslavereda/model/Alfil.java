@@ -4,6 +4,7 @@ import es.ieslavereda.TAD.ListaSE;
 import es.ieslavereda.Tool;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public abstract class Alfil extends Piece{
