@@ -137,6 +137,7 @@ public class Game {
     }
 
     public void selectMovement(){
+        Piece piece;
         boolean firstTry = true;
         Coordenada coordenadaEncontrada = null, coordenadaAux;
 
@@ -158,10 +159,18 @@ public class Game {
 
         if(coordenadaEncontrada!=null) {
             t.getCelda(coordenada).getPiece().moveTo(coordenadaEncontrada);
+            if(!(t.getCelda(coordenadaEncontrada).isEmpty())) {
+                piece = t.getCelda(coordenadaEncontrada).getPiece();
+                addKilledPiece(piece);
+            }
             setMovementDone(true);
         }else
             setMovementDone(false);
 
+    }
+
+    public void addKilledPiece(Piece piece){
+        t.getRemainigPieces().add(piece);
     }
 
 }
