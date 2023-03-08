@@ -3,6 +3,7 @@ package es.ieslavereda.model;
 import java.io.IOException;
 import java.util.Scanner;
 
+
 public class Entrada {
 
     public Entrada(){
@@ -51,19 +52,36 @@ public class Entrada {
         Scanner sc = new Scanner(System.in);
         String respuesta, example = "";
         String col;
-        int row;
-        boolean correcto = false;
+        int row = 0;
+        char secondChar;
+        boolean correcto = false, started = false;
+
+        respuesta = sc.nextLine();
+        if(respuesta.equalsIgnoreCase("C")){
+            return null;
+        }
 
         do {
-            respuesta = sc.nextLine();
+            if(started)
+                respuesta = sc.nextLine();
             col = String.valueOf(respuesta.charAt(0));
-            row = Integer.parseInt(String.valueOf(respuesta.charAt(1)));
+            //Comprobamos que el segundo caracter es un dígito
+            secondChar = respuesta.charAt(1);
+            if (Character.isDigit(secondChar)) {
+                row = Character.getNumericValue(secondChar);
+            } else {
+                System.out.println("Error: the second character should be a number.");
+                started = true;
+                continue;
+            }
+
 
             if (respuesta.length() == 2)
                 if(!(respuesta.toUpperCase().charAt(0)>'H' || respuesta.toUpperCase().charAt(0)<'A'))
                     if (!(row > 8 || row < 1))
                         correcto = true;
             if(!correcto) {
+                started = true;
                 example = "'" + (char) Tools.random(72, 65) + Tools.random(9, 1) + "'";
                 System.out.println("Error. You have to use the following format: " + example + "\n" +
                         "Column: from [A] to [H]\n" +

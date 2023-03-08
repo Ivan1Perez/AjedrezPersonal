@@ -10,13 +10,16 @@ import java.util.Set;
 public class Tablero{
 
     private IDeletePieceManager deletePieceManager;
+    private boolean whitesUp;
     private Map<Coordenada, Celda> mapaTablero;
 
     public Tablero(){
 
+        whitesUp = false;
         this.deletePieceManager = new DeletePieceManagerOwn();
         mapaTablero = new LinkedHashMap<>();
         Coordenada coordenada;
+
 
         for(int row = 0; row <=7; row++){
             for(int col=0; col<=7; col++){
@@ -25,6 +28,10 @@ public class Tablero{
             }
         }
 
+    }
+
+    public boolean isWhitesUp() {
+        return whitesUp;
     }
 
     public Celda getCelda(Coordenada coordenada){
@@ -39,6 +46,7 @@ public class Tablero{
         int whites = 8, blacks = 1, whitePawns = 7, blackPawns = 2;
 
         if(color==Color.BLACK){
+            whitesUp = true;
             whites = 1;
             blacks = 8;
             whitePawns = 2;

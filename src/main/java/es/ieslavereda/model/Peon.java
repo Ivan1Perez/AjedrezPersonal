@@ -1,9 +1,5 @@
 package es.ieslavereda.model;
 
-import es.ieslavereda.TAD.ListaSE;
-import es.ieslavereda.TAD.Node;
-import es.ieslavereda.Tool;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,62 +34,75 @@ public abstract class Peon extends Piece{
     @Override
     public Set<Coordenada> getNextMoves() {
         coordenadas = new HashSet<>();
-        Coordenada position = getCelda().getCoordenada();
-        Coordenada c;
-        boolean sameCol;
+        boolean whitesUp = getCelda().getTablero().isWhitesUp();
 
-        if (getColor() != Color.BLACK) {
-            sameCol = true;
-
-            //Up
-            c = position.up();
-            check(c, sameCol);
-            if(!moved) {
-                c = position.up().up();
-                check(c, sameCol);
-            }
-
-            sameCol = false;
-
-            //Initial UpLeft
-            c = position.upLeft();
-            check(c, sameCol);
-
-            //Initial UpRight
-            c = position.upRight();
-            check(c, sameCol);
-
+        if(!whitesUp){
+            if (getColor() != Color.BLACK) {
+                up();
+            }else
+                down();
         }else{
-            sameCol = true;
-
-            //Down
-            c = position.down();
-            check(c, sameCol);
-            if(!moved) {
-                c = position.down().down();
-                check(c, sameCol);
-            }
-
-            sameCol = false;
-
-            //Initial DownLeft
-            c = position.downLeft();
-            check(c, sameCol);
-
-            //Initial DownRight
-            c = position.downRigth();
-            check(c, sameCol);
+            if (getColor() != Color.BLACK) {
+                down();
+            }else
+                up();
         }
-
 
         return coordenadas;
     }
 
-    private void check(Coordenada c, boolean sameCol){
+    public void up(){
+        Coordenada position = getCelda().getCoordenada();
+        Coordenada c;
+        boolean sameColumn = true;
+
+        c = position.up();
+        check(c, sameColumn);
+        if(!moved) {
+            c = position.up().up();
+            check(c, sameColumn);
+        }
+
+        sameColumn = false;
+
+        //Initial UpLeft
+        c = position.upLeft();
+        check(c, sameColumn);
+
+        //Initial UpRight
+        c = position.upRight();
+        check(c, sameColumn);
+    }
+
+    public void down(){
+        Coordenada position = getCelda().getCoordenada();
+        Coordenada c;
+        boolean sameColumn = true;
+
+        //Down
+        c = position.down();
+        check(c, sameColumn);
+        if(!moved) {
+            c = position.down().down();
+            check(c, sameColumn);
+        }
+
+        sameColumn = false;
+
+        //Initial DownLeft
+        c = position.downLeft();
+        check(c, sameColumn);
+
+        //Initial DownRight
+        c = position.downRigth();
+        check(c, sameColumn);
+    }
+
+    private void check(Coordenada c, boolean sameColumn){
         Tablero tablero = getCelda().getTablero();
 
         if(tablero.getCelda(c)!=null){
-            if(sameCol) {
+            if(sameColumn) {
                 if (tablero.getCelda(c).isEmpty())
                     coordenadas.add(c);
             }else {
