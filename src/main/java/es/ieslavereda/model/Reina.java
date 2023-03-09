@@ -8,6 +8,9 @@ import java.util.Set;
 
 public abstract class Reina extends Piece{
 
+    public Reina() {
+    }
+
     public Reina(PieceType pieceType, Celda celda){
         super(pieceType,celda);
     }

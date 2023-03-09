@@ -12,6 +12,9 @@ public abstract class Torre extends Piece{
     private Set<Coordenada> coordenadas;
     private boolean moved;
 
+    public Torre() {
+    }
+
     public Torre(PieceType pieceType, Celda celda){
         super (pieceType, celda);
         moved = false;

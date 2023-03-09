@@ -16,6 +16,8 @@ public abstract class Piece {
     protected Celda celda;
     private boolean moved;
 
+    public Piece() {
+    }
 
     public Piece(PieceType shape, Celda celda){
         this.shape = shape;

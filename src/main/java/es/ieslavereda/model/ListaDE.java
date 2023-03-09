@@ -84,6 +84,29 @@ public class ListaDE<T> {
         return info;
     }
 
+    public boolean removePiece(T obj){
+        if (size==0) {
+            return false;
+        }
+        if (head.getInfo().equals(obj)) {
+            head = head.getNext();
+            size--;
+            return true;
+        }
+        Node<T> aux = head;
+        Node<T> aux2 = head.getNext();
+        while (aux2 != null) {
+            if (aux2.getInfo().equals(obj)) {
+                aux.setNext(aux2.getNext());
+                size--;
+                return true;
+            }
+            aux = aux2;
+            aux2 = aux2.getNext();
+        }
+        return false;
+    }
+
 //    public int count(Piece.PieceType pieceType){
 //        Node<T> aux = head;
 //        int count = 0;
@@ -134,7 +157,7 @@ public class ListaDE<T> {
         return output +"}";
     }
 
-     class Node<T>{
+     static class Node<T>{
 
         private final T info;
         private Node<T> next;
@@ -165,6 +188,15 @@ public class ListaDE<T> {
         public void setPrevious(Node<T> previous) {
             this.previous = previous;
         }
+
+//        @Override
+//        public boolean equals(Object obj){
+//            if(obj instanceof Node){
+//                Node<?> aux = (Node<?>)obj;
+//                return true;
+//            }
+//            return false;
+//        }
 
         @Override
         public String toString() {

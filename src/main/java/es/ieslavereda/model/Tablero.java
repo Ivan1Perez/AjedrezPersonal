@@ -62,32 +62,32 @@ public class Tablero{
         }
 
         try {
-            deletedPieces.add(new CaballoNegro(getCelda(new Coordenada('A', blacks))));
+            deletedPieces.add(new CaballoBlanco(getCelda(new Coordenada('A', blacks))));
         }catch (Exception e){
         }
 
         try {
-            deletedPieces.add(new AlfilNegro(getCelda(new Coordenada('A', blacks))));
+            deletedPieces.add(new AlfilBlanco(getCelda(new Coordenada('A', blacks))));
         }catch (Exception e){
         }
 
         try {
-            deletedPieces.add(new ReyNegro(getCelda(new Coordenada('A', blacks))));
+            deletedPieces.add(new ReyBlanco(getCelda(new Coordenada('A', blacks))));
         }catch (Exception e){
         }
 
         try {
-            deletedPieces.add(new ReinaNegra(getCelda(new Coordenada('A', blacks))));
+            deletedPieces.add(new ReinaBlanca(getCelda(new Coordenada('A', blacks))));
         }catch (Exception e){
         }
 
         try {
-            deletedPieces.add(new AlfilNegro(getCelda(new Coordenada('A', blacks))));
+            deletedPieces.add(new AlfilBlanco(getCelda(new Coordenada('A', blacks))));
         }catch (Exception e){
         }
 
         try {
-            deletedPieces.add(new CaballoNegro(getCelda(new Coordenada('A', blacks))));
+            deletedPieces.add(new CaballoBlanco(getCelda(new Coordenada('A', blacks))));
         }catch (Exception e){
         }
 
@@ -109,6 +109,8 @@ public class Tablero{
 //            new PeonBlanco(getCelda(new Coordenada(((char)('H'- i)), whitePawns)));
         }
         new PeonBlanco(getCelda(new Coordenada(((char)('H')), 2)));
+        new PeonBlanco(getCelda(new Coordenada(((char)('E')), 2)));
+
         new TorreBlanca(getCelda(new Coordenada('A',whites)));
         new CaballoBlanco(getCelda(new Coordenada('B',whites)));
         new AlfilBlanco(getCelda(new Coordenada('C', whites)));

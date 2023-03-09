@@ -30,6 +30,11 @@ public class DeletePieceManagerOwn implements IDeletePieceManager{
     }
 
     @Override
+    public boolean removePiece(Piece piece){
+        return pieces.removePiece(piece);
+    }
+
+    @Override
     public Piece removeLast() {
         return pieces.removeTail();
     }

@@ -44,6 +44,11 @@ public class DeletePieceManagerStandar implements IDeletePieceManager{
     }
 
     @Override
+    public boolean removePiece(Piece piece) {
+        return pieces.remove(piece);
+    }
+
+    @Override
     public ListaDE<Piece> getAll(){
         ListaDE<Piece> aux = new ListaDE<>();
 

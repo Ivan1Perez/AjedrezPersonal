@@ -10,6 +10,9 @@ public abstract class Caballo extends Piece{
 
     private Set<Coordenada> coordenadas;
 
+    public Caballo() {
+    }
+
     public Caballo(PieceType pieceType, Celda celda){
         super(pieceType, celda);
     }

@@ -160,7 +160,7 @@ public class Game {
                 piece = t.getCelda(coordenadaEncontrada).getPiece();
                 addKilledPiece(piece);
             }
-            movePiece(coordenadaEncontrada);
+            t.getCelda(coordenada).getPiece().moveTo(coordenadaEncontrada);
             setMovementDone(true);
         }else
             setMovementDone(false);
@@ -176,10 +176,6 @@ public class Game {
             else if (piece instanceof ReinaNegra)
                 ReinaNegra.setDeadReinaNegra(true);
         }
-    }
-
-    public void movePiece(Coordenada coordenadaEncontrada){
-        t.getCelda(coordenada).getPiece().moveTo(coordenadaEncontrada);
     }
 
 }

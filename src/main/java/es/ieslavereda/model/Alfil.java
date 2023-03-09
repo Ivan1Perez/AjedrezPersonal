@@ -11,6 +11,9 @@ public abstract class Alfil extends Piece{
 
     private Set<Coordenada> coordenadas;
 
+    public Alfil() {
+    }
+
     public Alfil(PieceType pieceType, Celda celda){
         super(pieceType, celda);
     }

@@ -51,7 +51,7 @@ public class MatchScreen {
         System.out.println("Enter a coordenate or press [C] to cancel:");
     }
 
-    public static void selectPieceToTransformMessage(List<Piece> pieces){
+    public static Piece selectPieceToTransformMessage(List<Piece> pieces){
         String outputPieces = "";
         int i = 0;
 
@@ -60,8 +60,17 @@ public class MatchScreen {
             i++;
         }
 
-        System.out.println("Select one of the available pieces\n" +
-                "Available pieces:\n" + outputPieces);
+        System.out.println("You've reached the end of the board.\n" +
+                "Do you want to exchange this pawn for one deleted piece?\n" +
+                "Yes → Press [Y]\n" +
+                "No → Press [N]");
+
+        if(Entrada.yesOrNotAnswer().equalsIgnoreCase("Y")) {
+            System.out.println("Select one of the available pieces:\n" + outputPieces);
+            return Entrada.selectDeletedPiece(pieces);
+        }
+
+        return null;
     }
 
 }
