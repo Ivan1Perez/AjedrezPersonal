@@ -35,6 +35,11 @@ public class DeletePieceManagerOwn implements IDeletePieceManager{
     }
 
     @Override
+    public ListaDE<Piece> getAll(){
+        return pieces;
+    }
+
+    @Override
     public String toString() {
         String output="";
 

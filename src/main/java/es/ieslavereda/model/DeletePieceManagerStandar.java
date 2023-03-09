@@ -40,7 +40,17 @@ public class DeletePieceManagerStandar implements IDeletePieceManager{
 
     @Override
     public Piece removeLast() {
-        return pieces.remove(pieces.size());
+        return pieces.remove(pieces.size()-1);
+    }
+
+    @Override
+    public ListaDE<Piece> getAll(){
+        ListaDE<Piece> aux = new ListaDE<>();
+
+        for(Piece p : pieces)
+            aux.addHead(p);
+
+        return aux;
     }
 
     @Override

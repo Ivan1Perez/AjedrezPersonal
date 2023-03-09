@@ -46,6 +46,10 @@ public class Tablero{
         return remainigPieces;
     }
 
+    public IDeletePieceManager getDeletedPieces() {
+        return deletedPieces;
+    }
+
     public void placePieces(Color color){
         int whites = 8, blacks = 1, whitePawns = 7, blackPawns = 2;
 
@@ -57,18 +61,54 @@ public class Tablero{
             blackPawns = 7;
         }
 
-        new TorreNegra(getCelda(new Coordenada('A', blacks)));
-        new CaballoNegro(getCelda(new Coordenada('B',blacks)));
-        new AlfilNegro(getCelda(new Coordenada('C',blacks)));
-        new ReyNegro(getCelda(new Coordenada('E',blacks)));
-        new ReinaNegra(getCelda(new Coordenada('D',blacks)));
-        new AlfilNegro(getCelda(new Coordenada('F',blacks)));
-        new CaballoNegro(getCelda(new Coordenada('G',blacks)));
-        new TorreNegra(getCelda(new Coordenada('H', blacks)));
-        for(int i = 0 ; i < 8 ; i++){
-            new PeonNegro(getCelda(new Coordenada(((char)('A'+ i)), blackPawns)));
-            new PeonBlanco(getCelda(new Coordenada(((char)('H'- i)), whitePawns)));
+        try {
+            deletedPieces.add(new CaballoNegro(getCelda(new Coordenada('A', blacks))));
+        }catch (Exception e){
         }
+
+        try {
+            deletedPieces.add(new AlfilNegro(getCelda(new Coordenada('A', blacks))));
+        }catch (Exception e){
+        }
+
+        try {
+            deletedPieces.add(new ReyNegro(getCelda(new Coordenada('A', blacks))));
+        }catch (Exception e){
+        }
+
+        try {
+            deletedPieces.add(new ReinaNegra(getCelda(new Coordenada('A', blacks))));
+        }catch (Exception e){
+        }
+
+        try {
+            deletedPieces.add(new AlfilNegro(getCelda(new Coordenada('A', blacks))));
+        }catch (Exception e){
+        }
+
+        try {
+            deletedPieces.add(new CaballoNegro(getCelda(new Coordenada('A', blacks))));
+        }catch (Exception e){
+        }
+
+        try {
+            deletedPieces.add(new TorreNegra(getCelda(new Coordenada('A', blacks))));
+        }catch (Exception e){
+        }
+
+//        new TorreNegra(getCelda(new Coordenada('A', blacks)));
+//        new CaballoNegro(getCelda(new Coordenada('B',blacks)));
+//        new AlfilNegro(getCelda(new Coordenada('C',blacks)));
+//        new ReyNegro(getCelda(new Coordenada('E',blacks)));
+//        new ReinaNegra(getCelda(new Coordenada('D',blacks)));
+//        new AlfilNegro(getCelda(new Coordenada('F',blacks)));
+//        new CaballoNegro(getCelda(new Coordenada('G',blacks)));
+//        new TorreNegra(getCelda(new Coordenada('H', blacks)));
+        for(int i = 0 ; i < 8 ; i++){
+//            new PeonNegro(getCelda(new Coordenada(((char)('A'+ i)), blackPawns)));
+//            new PeonBlanco(getCelda(new Coordenada(((char)('H'- i)), whitePawns)));
+        }
+        new PeonBlanco(getCelda(new Coordenada(((char)('H')), 2)));
         new TorreBlanca(getCelda(new Coordenada('A',whites)));
         new CaballoBlanco(getCelda(new Coordenada('B',whites)));
         new AlfilBlanco(getCelda(new Coordenada('C', whites)));

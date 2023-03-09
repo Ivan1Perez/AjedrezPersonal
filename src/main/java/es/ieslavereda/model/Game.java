@@ -13,7 +13,6 @@ public class Game {
     private Player player1, player2;
     private Set<Coordenada> coordenadas;
     Coordenada coordenada;
-    private MatchScreen matchScreen;
     private boolean movementDone;
 
     public Game() {
@@ -36,10 +35,9 @@ public class Game {
 
         if (start) {
             t = new Tablero();
-            matchScreen = new MatchScreen(this);
             insertNames();
 
-            matchScreen.printBoard(t);
+            MatchScreen.printBoard(t);
 
             match();
         }
@@ -57,7 +55,7 @@ public class Game {
     }
 
     public void chooseColor(){
-        matchScreen.chooseColorMessage(player1Name);
+        MatchScreen.chooseColorMessage(player1Name);
 
         color = e.chooseColor();
         player1 = new Player(player1Name, color);
@@ -76,16 +74,16 @@ public class Game {
         do {
             if(turnCounter==0) {
                 if (player1.getColor() == Color.WHITE)
-                    matchScreen.turnMessage(player1);
+                    MatchScreen.turnMessage(player1, isMovementDone());
                 else {
-                    matchScreen.turnMessage(player2);
+                    MatchScreen.turnMessage(player2, isMovementDone());
                     color = Color.WHITE;
                 }
             }else if(color==player1.getColor()){
-                matchScreen.turnMessage(player1);
+                MatchScreen.turnMessage(player1, isMovementDone());
             }
             else
-                matchScreen.turnMessage(player2);
+                MatchScreen.turnMessage(player2, isMovementDone());
 
             do {
                 turn();
@@ -103,14 +101,14 @@ public class Game {
         selectCell();
 
         if(coordenadas.size()==0)
-            matchScreen.noMovesAvailableMessage();
+            MatchScreen.noMovesAvailableMessage();
         else {
             t.highlight(coordenadas);
-            matchScreen.printBoard(t);
+            MatchScreen.printBoard(t);
             //A continuación el usuairo selecciona el movimiento o cancela el mover esa pieza
             selectMovement();
             t.resetColors();
-            matchScreen.printBoard(t);
+            MatchScreen.printBoard(t);
         }
 
     }
@@ -122,11 +120,11 @@ public class Game {
             coordenada = e.enterCoordenada();
             celda = t.getCelda(coordenada);
             if(celda.isEmpty()) {
-                matchScreen.emptyMessage();
+                MatchScreen.emptyMessage();
                 celda = null;
             }
             else if (celda.getPiece().getColor() != color) {
-                matchScreen.enemyPieceMessage();
+                MatchScreen.enemyPieceMessage();
                 celda = null;
             }
 
@@ -142,7 +140,7 @@ public class Game {
         Coordenada coordenadaEncontrada = null, coordenadaAux;
 
         do{
-            matchScreen.whereToMoveMessage(coordenadas, firstTry);
+            MatchScreen.whereToMoveMessage(coordenadas, firstTry);
             //Si la coordenada es null significa que se ha pulsado 'C' (cancelar).
             coordenadaAux = e.enterCoordenada();
             if(coordenadaAux!=null){
@@ -158,11 +156,11 @@ public class Game {
         }while(coordenadaEncontrada==null && coordenadaAux!=null);
 
         if(coordenadaEncontrada!=null) {
-            t.getCelda(coordenada).getPiece().moveTo(coordenadaEncontrada);
             if(!(t.getCelda(coordenadaEncontrada).isEmpty())) {
                 piece = t.getCelda(coordenadaEncontrada).getPiece();
                 addKilledPiece(piece);
             }
+            movePiece(coordenadaEncontrada);
             setMovementDone(true);
         }else
             setMovementDone(false);
@@ -170,7 +168,18 @@ public class Game {
     }
 
     public void addKilledPiece(Piece piece){
-        t.getRemainigPieces().add(piece);
+        t.getDeletedPieces().add(piece);
+
+        if(piece instanceof Reina) {
+            if (piece instanceof ReinaBlanca)
+                ReinaBlanca.setDeadReinaBlanca(true);
+            else if (piece instanceof ReinaNegra)
+                ReinaNegra.setDeadReinaNegra(true);
+        }
+    }
+
+    public void movePiece(Coordenada coordenadaEncontrada){
+        t.getCelda(coordenada).getPiece().moveTo(coordenadaEncontrada);
     }
 
 }

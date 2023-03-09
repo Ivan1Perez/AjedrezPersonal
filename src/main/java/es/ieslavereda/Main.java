@@ -17,7 +17,6 @@ public class Main {
         g.start();
 
 
-
 //        t.getCelda(new Coordenada('D', 7)).getPiece().moveTo(new Coordenada('D', 5));
 //        t.getCelda(new Coordenada('D', 2)).getPiece().moveTo(new Coordenada('D', 4));
 //        t.getCelda(new Coordenada('E', 2)).getPiece().moveTo(new Coordenada('E', 3));

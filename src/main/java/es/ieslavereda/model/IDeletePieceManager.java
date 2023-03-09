@@ -7,4 +7,6 @@ public interface IDeletePieceManager {
 //    Piece getLast();
     Piece removeLast();
 
+    ListaDE<Piece> getAll();
+
 }

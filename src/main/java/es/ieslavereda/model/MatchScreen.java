@@ -1,18 +1,17 @@
 package es.ieslavereda.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MatchScreen {
 
-    private Game game;
-    public MatchScreen(Game game) {
-        this.game = game;
+    public MatchScreen() {
     }
 
-    public void turnMessage(Player player){
-        if(!game.isMovementDone())
+    public static void turnMessage(Player player, boolean isMovementDone){
+        if(!isMovementDone)
             System.out.println("Movement canceled");
 
         System.out.println("It's " + player.getName() + "'s turn -> " + player.getColor());
@@ -20,29 +19,29 @@ public class MatchScreen {
         System.out.println("Enter a coordinate:");
     }
 
-    public void chooseColorMessage(String name){
+    public static void chooseColorMessage(String name){
         System.out.println("Player [" + name + "] choose color:\n" +
                 "White → Press [W]\n" +
                 "Black → Press [B]");
     }
 
-    public void enemyPieceMessage(){
+    public static void enemyPieceMessage(){
         System.out.println("This is an enemy piece. Please, select one of your pieces:");
     }
 
-    public void emptyMessage(){
+    public static void emptyMessage(){
         System.out.println("This cell is empty. Please, select a cell with a piece in it:");
     }
 
-    public void noMovesAvailableMessage(){
+    public static void noMovesAvailableMessage(){
         System.out.println("This piece has no moves availables at the moment. Try with another piece:");
     }
 
-    public void printBoard(Tablero t){
+    public static void printBoard(Tablero t){
         System.out.println(t + "\n");
     }
 
-    public void whereToMoveMessage(Set<Coordenada> coordenadas, boolean firstTry){
+    public static void whereToMoveMessage(Set<Coordenada> coordenadas, boolean firstTry){
         String outputCoordenadas = new ArrayList<>(coordenadas).toString();
 
         if(firstTry)
@@ -52,6 +51,17 @@ public class MatchScreen {
         System.out.println("Enter a coordenate or press [C] to cancel:");
     }
 
+    public static void selectPieceToTransformMessage(List<Piece> pieces){
+        String outputPieces = "";
+        int i = 0;
 
+        for(Piece p : pieces){
+            outputPieces += p.toString() + " → Press [" + i + "]\n";
+            i++;
+        }
+
+        System.out.println("Select one of the available pieces\n" +
+                "Available pieces:\n" + outputPieces);
+    }
 
 }
