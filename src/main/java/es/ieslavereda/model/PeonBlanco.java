@@ -1,10 +1,6 @@
 package es.ieslavereda.model;
 
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
 import java.util.List;
-
-import static es.ieslavereda.model.ReinaNegra.isDeadReinaNegra;
 
 public final class PeonBlanco extends Peon{
 
@@ -14,29 +10,33 @@ public final class PeonBlanco extends Peon{
 
     @Override
     public void transform() {
-        ListaDE<Piece> nonFilteredPieces = this.getCelda().getTablero().getDeletedPieces().getAll();
-        List<Piece> filteredPieces = Tools.getDeletedPiecesByColor(nonFilteredPieces, this.getColor());
+        ListaDE<Piece> nonFilteredDeletedPieces = this.getCelda().getTablero().getDeletedPieces().getAll();
+        List<Piece> filteredDeletedPieces = Tools.getDeletedPiecesByColor(nonFilteredDeletedPieces, this);
+        ListaDE<Piece> remainingPieces = this.getCelda().getTablero().getRemainigPieces().getAll();
 
-        Piece piece = MatchScreen.selectPieceToTransformMessage(filteredPieces);
+        Piece piece = MatchScreen.selectPieceToTransformMessage(filteredDeletedPieces);
 
         if(piece!=null) {
 
             switch (piece.getShape()) {
                 case WHITE_REINA:
-                    new ReinaBlanca(getCelda());
-                    this.getCelda().getTablero().getDeletedPieces().removePiece(new ReinaBlanca(getCelda()));
+                    Piece reinaBlanca = new ReinaBlanca(getCelda());
+                    Tools.addAndRemoveProcess(reinaBlanca, this, nonFilteredDeletedPieces, remainingPieces);
                     celda=null;
                     break;
                 case WHITE_TORRE:
-                    new TorreBlanca(getCelda());
+                    Piece torreBlanca = new TorreBlanca(getCelda());
+                    Tools.addAndRemoveProcess(torreBlanca, this, nonFilteredDeletedPieces, remainingPieces);
                     celda=null;
                     break;
                 case WHITE_CABALLO:
-                    new CaballoBlanco(getCelda());
+                    Piece caballoBlanco = new CaballoBlanco(getCelda());
+                    Tools.addAndRemoveProcess(caballoBlanco, this, nonFilteredDeletedPieces, remainingPieces);
                     celda=null;
                     break;
                 case WHITE_ALFIL:
-                    new AlfilBlanco(getCelda());
+                    Piece alfilBlanco = new AlfilBlanco(getCelda());
+                    Tools.addAndRemoveProcess(alfilBlanco, this, nonFilteredDeletedPieces, remainingPieces);
                     celda=null;
                     break;
                 default:

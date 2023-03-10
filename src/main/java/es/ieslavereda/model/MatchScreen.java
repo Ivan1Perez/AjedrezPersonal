@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.diogonunes.jcolor.Ansi.colorize;
+
 public class MatchScreen {
 
     public MatchScreen() {
@@ -55,8 +57,14 @@ public class MatchScreen {
         String outputPieces = "";
         int i = 0;
 
+        if(pieces.size()==0){
+            System.out.println("There isn't any available piece at the moment.");
+            return null;
+        }
+
         for(Piece p : pieces){
-            outputPieces += p.toString() + " → Press [" + i + "]\n";
+            outputPieces += colorize(" " + p.getShape() + " ", p.getColor().getAttribute(), Celda.ColorCelda.BLACK_CELL.getAttribute());
+            outputPieces += " → Press [" + i + "]\n";
             i++;
         }
 
@@ -66,7 +74,8 @@ public class MatchScreen {
                 "No → Press [N]");
 
         if(Entrada.yesOrNotAnswer().equalsIgnoreCase("Y")) {
-            System.out.println("Select one of the available pieces:\n" + outputPieces);
+            System.out.println("Select one of the available pieces:\n"
+                    + outputPieces);
             return Entrada.selectDeletedPiece(pieces);
         }
 

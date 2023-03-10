@@ -158,24 +158,14 @@ public class Game {
         if(coordenadaEncontrada!=null) {
             if(!(t.getCelda(coordenadaEncontrada).isEmpty())) {
                 piece = t.getCelda(coordenadaEncontrada).getPiece();
-                addKilledPiece(piece);
+                t.getDeletedPieces().add(piece);
+                t.getRemainigPieces().removePiece(piece);
             }
             t.getCelda(coordenada).getPiece().moveTo(coordenadaEncontrada);
             setMovementDone(true);
         }else
             setMovementDone(false);
 
-    }
-
-    public void addKilledPiece(Piece piece){
-        t.getDeletedPieces().add(piece);
-
-        if(piece instanceof Reina) {
-            if (piece instanceof ReinaBlanca)
-                ReinaBlanca.setDeadReinaBlanca(true);
-            else if (piece instanceof ReinaNegra)
-                ReinaNegra.setDeadReinaNegra(true);
-        }
     }
 
 }

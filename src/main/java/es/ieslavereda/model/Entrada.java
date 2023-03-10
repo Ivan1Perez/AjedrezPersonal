@@ -52,44 +52,39 @@ public class Entrada {
     public Coordenada enterCoordenada(){
         Scanner sc = new Scanner(System.in);
         String respuesta, example = "";
-        String col;
+        String col = "";
         int row = 0;
         char secondChar;
-        boolean correcto = false, started = false;
-
-        respuesta = sc.nextLine();
-        if(respuesta.equalsIgnoreCase("C")){
-            return null;
-        }
+        boolean correcto = false;
 
         do {
-            if(started)
-                respuesta = sc.nextLine();
-            col = String.valueOf(respuesta.charAt(0));
-            //Comprobamos que el segundo caracter es un dígito
-            secondChar = respuesta.charAt(1);
-            if (Character.isDigit(secondChar)) {
-                row = Character.getNumericValue(secondChar);
-            } else {
-                System.out.println("Error: the second character should be a number.");
-                started = true;
+            respuesta = sc.nextLine();
+            if (respuesta.equalsIgnoreCase("C")) {
+                return null;
+            }
+
+            if (respuesta.length() != 2) {
+                System.out.println("Error: the input must have exactly 2 characters.");
                 continue;
             }
 
+            col = String.valueOf(respuesta.charAt(0)).toUpperCase();
+            secondChar = respuesta.charAt(1);
 
-            if (respuesta.length() == 2)
-                if(!(respuesta.toUpperCase().charAt(0)>'H' || respuesta.toUpperCase().charAt(0)<'A'))
-                    if (!(row > 8 || row < 1))
-                        correcto = true;
-            if(!correcto) {
-                started = true;
-                example = "'" + (char) Tools.random(72, 65) + Tools.random(9, 1) + "'";
-                System.out.println("Error. You have to use the following format: " + example + "\n" +
-                        "Column: from [A] to [H]\n" +
-                        "Row: from [1] to [9]");
+            if (col.charAt(0) < 'A' || col.charAt(0) > 'H') {
+                System.out.println("Error: the first character must be a letter between A and H.");
+                continue;
             }
 
-        }while(!correcto);
+            if (secondChar < '1' || secondChar > '8') {
+                System.out.println("Error: the second character must be a number between 1 and 8.");
+                continue;
+            }
+
+            row = Character.getNumericValue(secondChar);
+            correcto = true;
+
+        } while (!correcto);
 
         return new Coordenada(col.charAt(0), row);
     }

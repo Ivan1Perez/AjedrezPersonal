@@ -61,6 +61,15 @@ public abstract class Piece {
     }
 
     @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Piece){
+            Piece aux = (Piece) obj;
+            return aux.getShape()==getShape() && aux.getColor()==getColor();
+        }
+        return false;
+    }
+
+    @Override
     public String toString(){
 //        return "Shape: " + shape.shape + "\n";
         return colorize(shape.toString(),shape.color.getAttribute(),celda.getColor().getAttribute());
@@ -84,7 +93,7 @@ public abstract class Piece {
         WHITE_PEON('♟', Color.WHITE);
 
 
-         private char shape;
+        private char shape;
         private Color color;
 
         PieceType(char shape,  Color color){
