@@ -12,11 +12,13 @@ public class MatchScreen {
     public MatchScreen() {
     }
 
-    public static void turnMessage(Player player, boolean isMovementDone){
+    public static void turnMessage(Player player, boolean isMovementDone, boolean kingOnTarget){
         if(!isMovementDone)
             System.out.println("Movement canceled");
 
         System.out.println("It's " + player.getName() + "'s turn -> " + player.getColor());
+        if(kingOnTarget)
+            System.out.println("Attention! The king is in check!");
         System.out.println("Which piece do you want to move?");
         System.out.println("Enter a coordinate:");
     }
@@ -80,6 +82,12 @@ public class MatchScreen {
         }
 
         return null;
+    }
+
+    public static void winnerMessage(Player player, int totalTurns){
+
+        System.out.println("Player [" + player.getName() + " -> " + player.getColor() +"] wins!");
+        System.out.println("Total movements: " + totalTurns);
     }
 
 }

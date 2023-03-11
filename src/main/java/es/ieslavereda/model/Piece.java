@@ -5,6 +5,9 @@ import es.ieslavereda.TAD.Node;
 
 import com.diogonunes.jcolor.Attribute;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
@@ -54,7 +57,6 @@ public abstract class Piece {
     public PieceType getShape() {
         return shape;
     }
-
 
     public void putInYourPlace(){
         celda.setPiece(this);

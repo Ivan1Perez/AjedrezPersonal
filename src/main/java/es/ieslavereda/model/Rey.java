@@ -3,8 +3,7 @@ package es.ieslavereda.model;
 import es.ieslavereda.TAD.ListaSE;
 import es.ieslavereda.Tool;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Rey extends Piece{
 
@@ -82,48 +81,51 @@ public class Rey extends Piece{
 
     }
 
-    private void checkEnroque(Coordenada c){
+    private void checkEnroque(Coordenada c) {
         Tablero tablero = getCelda().getTablero();
-        int i = 0;
+        List<Coordenada> aux = new LinkedList<>();
+        Coordenada coordAux = c.left();
 
-        //Enroque largo
-        ListaSE aux = new ListaSE();
-        aux.addTail(c.left());
-        aux.addTail(c.left().left());
-        aux.addTail(c.left().left().left());
-        aux.addTail(c.left().left().left().left());
-
-        while(tablero.getCelda(aux.get(i)).isEmpty() && i < aux.size()-1){
-            i++;
+        //Enroque izquierda
+        while (!(coordAux.getCol()<'A' || coordAux.getCol()>'H')) {
+            aux.add(coordAux);
+            coordAux = coordAux.left();
         }
 
-        //Si 'i' llega a la posición de la Lista anterior a donde está ubicada la Torre (3) avanzaremos al siguiente paso
-        if(i==3){
-            if(!tablero.getCelda(aux.get(aux.size()-1)).isEmpty() && !tablero.getCelda(aux.get(aux.size()-1)).getPiece().hasMoved()){
-                coordenadas.add(c.left().left());
-            }
+        if (!(tablero.getCelda(aux.get(aux.size() - 1)).isEmpty()) &&
+                !(tablero.getCelda(aux.get(aux.size() - 1)).getPiece().hasMoved())) {
+            enroqueAddCoordenadas(aux, tablero);
         }
+
 
 //----------------------------------------------------------------------------------------------------------------------
 
-        //Enroque corto
-        i = 0;
+        //Enroque derecha
+        coordAux = c.right();
+        aux = new LinkedList<>();
 
-        aux = new ListaSE();
-
-        aux.addTail(c.right());
-        aux.addTail(c.right().right());
-        aux.addTail(c.right().right().right());
-
-        while(tablero.getCelda(aux.get(i)).isEmpty() && i < aux.size()-1){
-            i++;
+        while (!(coordAux.getCol()<'A' || coordAux.getCol()>'H')) {
+            aux.add(coordAux);
+            coordAux = coordAux.right();
         }
 
-        if(i==2){
-            if(!tablero.getCelda(aux.get(aux.size()-1)).isEmpty() && !tablero.getCelda(aux.get(aux.size()-1)).getPiece().hasMoved()){
-                coordenadas.add(c.right().right());
-            }
-        }
+        if (!(tablero.getCelda(aux.get(aux.size() - 1)).isEmpty()) &&
+                !(tablero.getCelda(aux.get(aux.size() - 1)).getPiece().hasMoved()))
+            enroqueAddCoordenadas(aux, tablero);
     }
 
+    public void enroqueAddCoordenadas(List<Coordenada> aux, Tablero tablero){
+        Coordenada coordenadaTorre;
+        boolean noPiecesInTheWay = true;
+        int i = 0;
+
+        coordenadaTorre = tablero.getCelda(aux.get(aux.size()-1)).getCoordenada();
+        while (i < aux.size() - 1 && noPiecesInTheWay) {
+            if (!(tablero.getCelda(aux.get(i)).isEmpty()))
+                noPiecesInTheWay = false;
+            i++;
+        }
+        if(noPiecesInTheWay)
+            coordenadas.add(coordenadaTorre);
+    }
 }

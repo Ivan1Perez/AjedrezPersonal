@@ -1,8 +1,6 @@
 package es.ieslavereda.model;
 
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 public class Game {
 
@@ -12,13 +10,19 @@ public class Game {
     private Color color;
     private Player player1, player2;
     private Set<Coordenada> coordenadas;
-    Coordenada coordenada;
+    private Coordenada coordenada;
     private boolean movementDone;
+    private boolean kingOnTarget;
+    private Color colorKingOnTarget;
+    public boolean end;
 
     public Game() {
 
         e = new Entrada();
         movementDone = true;
+        kingOnTarget = false;
+        colorKingOnTarget = null;
+        end = false;
 
     }
 
@@ -68,23 +72,28 @@ public class Game {
     }
 
     public void match(){
-        boolean end = false;
         int turnCounter = 0;
+        Color currentPlayerColor;
+        Player currentPlayer;
+        boolean currentPlayerHasKingOnTarget;
 
         do {
-            if(turnCounter==0) {
-                if (player1.getColor() == Color.WHITE)
-                    MatchScreen.turnMessage(player1, isMovementDone());
-                else {
-                    MatchScreen.turnMessage(player2, isMovementDone());
-                    color = Color.WHITE;
-                }
-            }else if(color==player1.getColor()){
-                MatchScreen.turnMessage(player1, isMovementDone());
-            }
-            else
-                MatchScreen.turnMessage(player2, isMovementDone());
+            if (turnCounter == 0) {
+                currentPlayerColor = player1.getColor();
+                currentPlayer = player1;
 
+                if (currentPlayerColor == Color.BLACK) {
+                    color = Color.WHITE;
+                    currentPlayer = player2;
+                }
+
+                MatchScreen.turnMessage(currentPlayer, isMovementDone(), kingOnTarget);
+            } else {
+                currentPlayer = color == player1.getColor() ? player1 : player2;
+                currentPlayerHasKingOnTarget = kingOnTarget && colorKingOnTarget == color;
+
+                MatchScreen.turnMessage(currentPlayer, isMovementDone(), currentPlayerHasKingOnTarget);
+            }
             do {
                 turn();
             }while(coordenadas.size()==0);
@@ -95,6 +104,9 @@ public class Game {
             color = color.next();
             turnCounter++;
         }while(!end);
+
+        MatchScreen.winnerMessage(currentPlayer, turnCounter);
+
     }
 
     public void turn(){
@@ -105,12 +117,12 @@ public class Game {
         else {
             t.highlight(coordenadas);
             MatchScreen.printBoard(t);
-            //A continuación el usuairo selecciona el movimiento o cancela el mover esa pieza
+            //A continuación el usuario selecciona el movimiento o cancela el mover esa pieza
             selectMovement();
             t.resetColors();
+            isKingOnTarget();
             MatchScreen.printBoard(t);
         }
-
     }
 
     public void selectCell(){
@@ -135,7 +147,6 @@ public class Game {
     }
 
     public void selectMovement(){
-        Piece piece;
         boolean firstTry = true;
         Coordenada coordenadaEncontrada = null, coordenadaAux;
 
@@ -156,16 +167,71 @@ public class Game {
         }while(coordenadaEncontrada==null && coordenadaAux!=null);
 
         if(coordenadaEncontrada!=null) {
-            if(!(t.getCelda(coordenadaEncontrada).isEmpty())) {
-                piece = t.getCelda(coordenadaEncontrada).getPiece();
-                t.getDeletedPieces().add(piece);
-                t.getRemainigPieces().removePiece(piece);
-            }
+            placeMovement(coordenadaEncontrada);
             t.getCelda(coordenada).getPiece().moveTo(coordenadaEncontrada);
             setMovementDone(true);
         }else
             setMovementDone(false);
 
+    }
+
+    public void placeMovement(Coordenada coordenada){
+        Piece piece;
+        if(!(t.getCelda(coordenada).isEmpty())) {
+            piece = t.getCelda(coordenada).getPiece();
+            t.getDeletedPieces().add(piece);
+            t.getRemainigPieces().removePiece(piece);
+            if(piece instanceof Rey)
+                end = true;
+        }
+    }
+
+    public void isKingOnTarget(){
+        Map<Coordenada, Celda> mapaTablero = t.getMapaTablero();
+        Celda celda;
+        Coordenada coordendaRey = null;
+        List<Coordenada> allPossibleMovesByColor = filterCoordenatesByColor(mapaTablero);
+        Class<? extends Rey> claseRey;
+        boolean kingFound = false;
+
+        //Obtenemos la clase 'ReyBlanco'/'ReyNegro' contrarias al color del jugador en turno
+        if (color == Color.WHITE) {
+            claseRey = ReyNegro.class;
+            colorKingOnTarget = Color.BLACK;
+        } else {
+            claseRey = ReyBlanco.class;
+            colorKingOnTarget = Color.WHITE;
+        }
+
+        for(Coordenada c : mapaTablero.keySet()){
+            celda = mapaTablero.get(c);
+            if(claseRey.isInstance(celda.getPiece())) {
+                coordendaRey = c;
+            }
+        }
+        for(Coordenada c1 : allPossibleMovesByColor)
+            if (c1.equals(coordendaRey)){
+                t.highlightKing(c1);
+                kingFound = true;
+            }
+
+        if (kingFound)
+            kingOnTarget = true;
+        else
+            kingOnTarget = false;
+    }
+
+    public List<Coordenada> filterCoordenatesByColor(Map<Coordenada, Celda> mapaTablero){
+        List<Coordenada> allPossibleMovesByColor = new ArrayList<>();
+
+        for(Celda c : mapaTablero.values()){
+            if(c.getPiece()!=null)
+                //Obtenemos todos los posibles movimientos de las piezas del color en turno
+                if(c.getPiece().getColor()==color)
+                    allPossibleMovesByColor.addAll(c.getPiece().getNextMoves());
+        }
+
+        return allPossibleMovesByColor;
     }
 
 }
