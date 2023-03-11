@@ -57,9 +57,6 @@ public class Rey extends Piece{
         check(c);
 
 
-        /*Nota: El enroque consiste en mover el rey dos casillas hacia la torre en la primera
-         fila del jugador, y luego mover la torre al escaque sobre que el rey ha cruzado.
-         */
         //Enroque
         if(!moved) {
             checkEnroque(position);
@@ -128,4 +125,5 @@ public class Rey extends Piece{
         if(noPiecesInTheWay)
             coordenadas.add(coordenadaTorre);
     }
+
 }

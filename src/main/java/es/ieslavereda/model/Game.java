@@ -121,6 +121,11 @@ public class Game {
             selectMovement();
             t.resetColors();
             isKingOnTarget();
+            if(kingOnTarget){
+                if(isCheckmate()){
+
+                }
+            }
             MatchScreen.printBoard(t);
         }
     }
@@ -190,7 +195,7 @@ public class Game {
         Map<Coordenada, Celda> mapaTablero = t.getMapaTablero();
         Celda celda;
         Coordenada coordendaRey = null;
-        List<Coordenada> allPossibleMovesByColor = filterCoordenatesByColor(mapaTablero);
+        List<Coordenada> allPossibleMovesByColor = filterCoordenatesByColor();
         Class<? extends Rey> claseRey;
         boolean kingFound = false;
 
@@ -221,10 +226,10 @@ public class Game {
             kingOnTarget = false;
     }
 
-    public List<Coordenada> filterCoordenatesByColor(Map<Coordenada, Celda> mapaTablero){
+    public List<Coordenada> filterCoordenatesByColor(){
         List<Coordenada> allPossibleMovesByColor = new ArrayList<>();
 
-        for(Celda c : mapaTablero.values()){
+        for(Celda c : t.getMapaTablero().values()){
             if(c.getPiece()!=null)
                 //Obtenemos todos los posibles movimientos de las piezas del color en turno
                 if(c.getPiece().getColor()==color)
@@ -232,6 +237,33 @@ public class Game {
         }
 
         return allPossibleMovesByColor;
+    }
+
+    public boolean isCheckmate() {
+        Map<Coordenada, Celda> auxMapaTablero = new HashMap<>(t.getMapaTablero());
+        Map<Celda, Set<Coordenada>> cellsMovementsByColor = new HashMap<>(getEveryCellMovementsByColor());
+        List<Coordenada> allPossibleMovesByColor;
+        Coordenada auxCoordenada;
+
+        // Realizamos cada uno de los movimientos y verificamos si el rey sigue en jaque después de cada una de ellas
+            if (!kingOnTarget) {
+                return false;
+            }
+        }
+
+        // Si en todas las jugadas legales el rey sigue en jaque, se considera que hay jaque mate
+        return true;
+    }
+
+    public Map<Celda, Set<Coordenada>> getEveryCellMovementsByColor(){
+        Map<Celda, Set<Coordenada>> cellsMovementsByColor = new HashMap<>();
+
+        for(Celda celda : t.getMapaTablero().values()){
+            if(celda.getPiece().getColor()==color)
+                cellsMovementsByColor.put(celda, celda.getPiece().getNextMoves());
+        }
+
+        return cellsMovementsByColor;
     }
 
 }
