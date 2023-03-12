@@ -128,13 +128,13 @@ public class Tablero{
 //---------------------------- PARA DEMOSTRACIÓN---------------------------------------------------------------
 
 
-//        getRemainigPieces().add(new TorreNegra(getCelda(new Coordenada('A', blacks))));
-//        getRemainigPieces().add(new CaballoNegro(getCelda(new Coordenada('B',blacks))));
-//        getRemainigPieces().add(new AlfilNegro(getCelda(new Coordenada('C',blacks))));
+        getRemainigPieces().add(new TorreNegra(getCelda(new Coordenada('A', blacks))));
+        getRemainigPieces().add(new CaballoNegro(getCelda(new Coordenada('B',blacks))));
+        getRemainigPieces().add(new AlfilNegro(getCelda(new Coordenada('C',blacks))));
         getRemainigPieces().add(new ReyNegro(getCelda(new Coordenada(kingPosition,blacks))));
-//        getRemainigPieces().add(new ReinaNegra(getCelda(new Coordenada(queenPosition,blacks))));
+        getRemainigPieces().add(new ReinaNegra(getCelda(new Coordenada(queenPosition,blacks))));
         getRemainigPieces().add(new AlfilNegro(getCelda(new Coordenada('F',blacks))));
-        getRemainigPieces().add(new CaballoNegro(getCelda(new Coordenada('D',6))));
+        getRemainigPieces().add(new CaballoNegro(getCelda(new Coordenada('G',blacks))));
         getRemainigPieces().add(new TorreNegra(getCelda(new Coordenada('H', blacks))));
         for(int i = 0 ; i < 8 ; i++){
             getRemainigPieces().add(new PeonNegro(getCelda(new Coordenada(((char)('A'+ i)), blackPawns))));
@@ -143,7 +143,7 @@ public class Tablero{
         getRemainigPieces().add(new TorreBlanca(getCelda(new Coordenada('A',whites))));
         getRemainigPieces().add(new CaballoBlanco(getCelda(new Coordenada('B',whites))));
         getRemainigPieces().add(new AlfilBlanco(getCelda(new Coordenada('C', whites))));
-        getRemainigPieces().add(new ReinaBlanca(getCelda(new Coordenada('B',blacks))));
+        getRemainigPieces().add(new ReinaBlanca(getCelda(new Coordenada(queenPosition,whites))));
         getRemainigPieces().add(new ReyBlanco(getCelda(new Coordenada(kingPosition, whites))));
         getRemainigPieces().add(new AlfilBlanco(getCelda(new Coordenada('F', whites))));
         getRemainigPieces().add(new CaballoBlanco(getCelda(new Coordenada('G',whites))));

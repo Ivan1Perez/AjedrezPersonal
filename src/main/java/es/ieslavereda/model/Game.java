@@ -230,14 +230,10 @@ public class Game {
         boolean firstTry = true;
         Coordenada coordenadaEncontrada = null, coordenadaAux;
         Map<Celda, Set<Coordenada>> mapaCoordsAvailable;
-        Set<Coordenada> coordenatesOfCellAvailable = new HashSet<>();
-
 
         do {
             if (kingOnTarget && colorKingOnTarget == color) {
                 mapaCoordsAvailable = new HashMap<>(availableMoves);
-                for (Set<Coordenada> coordenadaSet : mapaCoordsAvailable.values())
-                    coordenatesOfCellAvailable.addAll(coordenadaSet);
             } else {
                 mapaCoordsAvailable = new HashMap<>();
                 mapaCoordsAvailable.put(celda, coordenadas);
@@ -251,12 +247,13 @@ public class Game {
                     for (Coordenada coordenadaSet1 : mapaCoordsAvailable.get(celda)) {
                         if (coordenadaAux.equals(coordenadaSet1))
                             coordenadaEncontrada = coordenadaAux;
-                        else
-                            System.out.println("The king is in check. You have to select another movement or another piece.");
                     }
-                } else {
+                }
+                if(coordenadaEncontrada==null){
                     if (kingOnTarget && colorKingOnTarget == color)
                         System.out.println("The king is in check. You have to select another movement or another piece.");
+                    else
+                        System.out.println("That's not an available move. Please, select another one.");
                 }
 
                 firstTry = false;
