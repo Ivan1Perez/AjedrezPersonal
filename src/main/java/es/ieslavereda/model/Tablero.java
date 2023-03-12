@@ -54,6 +54,10 @@ public class Tablero{
         return mapaTablero;
     }
 
+    public void setMapaTablero(Map<Coordenada, Celda> mapaTablero) {
+        this.mapaTablero = mapaTablero;
+    }
+
     public void placePieces(Color color){
         int whites = 8, blacks = 1, whitePawns = 7, blackPawns = 2;
         char queenPosition = 'D', kingPosition = 'E';

@@ -86,6 +86,7 @@ public class MatchScreen {
 
     public static void winnerMessage(Player player, int totalTurns){
 
+        System.out.println("Checkmate! The game is over.");
         System.out.println("Player [" + player.getName() + " -> " + player.getColor() +"] wins!");
         System.out.println("Total movements: " + totalTurns);
     }

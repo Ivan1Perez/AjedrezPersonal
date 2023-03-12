@@ -16,12 +16,15 @@ public class Game {
     private Color colorKingOnTarget;
     public boolean end;
 
+    private Map<Celda, Set<Coordenada>> availableMoves;
+
     public Game() {
 
         e = new Entrada();
         movementDone = true;
         kingOnTarget = false;
         colorKingOnTarget = null;
+        availableMoves = new HashMap<>();
         end = false;
 
     }
@@ -32,6 +35,10 @@ public class Game {
 
     public void setMovementDone(boolean movementDone) {
         this.movementDone = movementDone;
+    }
+
+    public Map<Celda, Set<Coordenada>> getAvailableMoves() {
+        return availableMoves;
     }
 
     public void start(){
@@ -75,7 +82,7 @@ public class Game {
         int turnCounter = 0;
         Color currentPlayerColor;
         Player currentPlayer;
-        boolean currentPlayerHasKingOnTarget;
+        boolean currentPlayerHasKingOnTarget = false;
 
         do {
             if (turnCounter == 0) {
@@ -110,7 +117,7 @@ public class Game {
     }
 
     public void turn(){
-        selectCell();
+        Celda celda = selectCell();
 
         if(coordenadas.size()==0)
             MatchScreen.noMovesAvailableMessage();
@@ -118,19 +125,19 @@ public class Game {
             t.highlight(coordenadas);
             MatchScreen.printBoard(t);
             //A continuación el usuario selecciona el movimiento o cancela el mover esa pieza
-            selectMovement();
+            selectMovement(celda);
             t.resetColors();
-            isKingOnTarget();
-            if(kingOnTarget){
-                if(isCheckmate()){
-
-                }
+            if(movementDone){
+                isKingOnTarget(false, t);
+                if(kingOnTarget)
+                    if(colorKingOnTarget!=color)
+                        isCheckmate();
             }
             MatchScreen.printBoard(t);
         }
     }
 
-    public void selectCell(){
+    public Celda selectCell(){
         Celda celda;
 
         do {
@@ -149,22 +156,35 @@ public class Game {
 
         coordenadas = new HashSet<>(celda.getPiece().getNextMoves());
 
+        return celda;
     }
 
-    public void selectMovement(){
+    public void selectMovement(Celda celda){
         boolean firstTry = true;
         Coordenada coordenadaEncontrada = null, coordenadaAux;
+        Set<Coordenada> coordsAvailable = new HashSet<>();
 
         do{
-            MatchScreen.whereToMoveMessage(coordenadas, firstTry);
+            if(kingOnTarget && colorKingOnTarget == color && availableMoves != null && availableMoves.size() > 0) {
+                for(Set<Coordenada> coordSet : availableMoves.values()){
+                    coordsAvailable.addAll(coordSet);
+                }
+            }else
+                coordsAvailable = new HashSet<>(coordenadas);
+
+            MatchScreen.whereToMoveMessage(coordsAvailable, firstTry);
             //Si la coordenada es null significa que se ha pulsado 'C' (cancelar).
             coordenadaAux = e.enterCoordenada();
             if(coordenadaAux!=null){
-                if(coordenadas.contains(coordenadaAux)){
+                if(coordsAvailable.contains(coordenadaAux)){
                     coordenadaEncontrada = coordenadaAux;
                 }
-                else
-                    System.out.println("Error. Please, select one of the possible moves.");
+                else{
+                    if(kingOnTarget && colorKingOnTarget == color)
+                        System.out.println("Movement not allowed. Be aware that the king is in check!");
+                    else
+                        System.out.println("Error. Please, select one of the possible moves.");
+                }
 
                 firstTry = false;
             }
@@ -191,8 +211,8 @@ public class Game {
         }
     }
 
-    public void isKingOnTarget(){
-        Map<Coordenada, Celda> mapaTablero = t.getMapaTablero();
+    public void isKingOnTarget(boolean checkMateOnUse, Tablero tablero){
+        Map<Coordenada, Celda> mapaTablero = new HashMap<>(tablero.getMapaTablero());
         Celda celda;
         Coordenada coordendaRey = null;
         List<Coordenada> allPossibleMovesByColor = filterCoordenatesByColor();
@@ -216,7 +236,8 @@ public class Game {
         }
         for(Coordenada c1 : allPossibleMovesByColor)
             if (c1.equals(coordendaRey)){
-                t.highlightKing(c1);
+                if(!checkMateOnUse)
+                    t.highlightKing(c1);
                 kingFound = true;
             }
 
@@ -224,6 +245,7 @@ public class Game {
             kingOnTarget = true;
         else
             kingOnTarget = false;
+
     }
 
     public List<Coordenada> filterCoordenatesByColor(){
@@ -239,27 +261,65 @@ public class Game {
         return allPossibleMovesByColor;
     }
 
-    public boolean isCheckmate() {
-        Map<Coordenada, Celda> auxMapaTablero = new HashMap<>(t.getMapaTablero());
+    public void isCheckmate() {
+//----------------------------------------------------------------------------------------------------------------
+        //Instanciamos nuevo tablero con las posiciones de las piezas como se encuentran ahora
+        Tablero tableroAux = new Tablero();
+        tableroAux.setMapaTablero(t.getMapaTablero());
+//----------------------------------------------------------------------------------------------------------------
         Map<Celda, Set<Coordenada>> cellsMovementsByColor = new HashMap<>(getEveryCellMovementsByColor());
-        List<Coordenada> allPossibleMovesByColor;
-        Coordenada auxCoordenada;
+        Coordenada originalPosition;
+        Set<Coordenada> possibleMovesOfCellByColor;
+        Piece piece;
+        boolean notCheckMate = false;
+        Map<Celda, Set<Coordenada>> availableMovesByCells = new HashMap<>();
+        Set<Coordenada> coordenateSet;
 
-        // Realizamos cada uno de los movimientos y verificamos si el rey sigue en jaque después de cada una de ellas
-            if (!kingOnTarget) {
-                return false;
+        // Realizamos cada uno de los movimientos del jugador contrario
+        // y verificamos si el rey sigue en jaque después de cada uno de ellos
+
+        for (Celda celda : cellsMovementsByColor.keySet()) {
+            possibleMovesOfCellByColor = cellsMovementsByColor.get(celda);
+            originalPosition = celda.getCoordenada();
+            coordenateSet = new HashSet<>();
+
+            // Iteramos sobre las coordenadas y realizamos cada movimiento en un tablero auxiliar
+            for (Coordenada coord : possibleMovesOfCellByColor) {
+                if (!(tableroAux.getMapaTablero().get(celda.getCoordenada()).isEmpty())) {
+                    piece = tableroAux.getMapaTablero().get(celda.getCoordenada()).getPiece();
+                    piece.moveTo(coord);
+
+                    // Verificamos si el rey sigue en jaque después del movimiento
+                    isKingOnTarget(true, tableroAux);
+                    if (!kingOnTarget) {
+                        notCheckMate = true;
+                        coordenateSet.add(coord);
+                    }
+                    //Volvemos a poner esta pieza en la posición en la que estaba.
+                    piece.moveTo(originalPosition);
+                }
             }
+            if (coordenateSet.size() > 0)
+                availableMovesByCells.put(celda, coordenateSet);
         }
 
-        // Si en todas las jugadas legales el rey sigue en jaque, se considera que hay jaque mate
-        return true;
+        // Si en todas las jugadas el rey sigue en jaque, hay jaque mate y se acaba la partida.
+        if(notCheckMate){
+            kingOnTarget = true;
+            availableMoves = new HashMap<>(availableMovesByCells);
+        }
+        else{
+            availableMoves = new HashMap<>();
+            end = true;
+        }
+
     }
 
     public Map<Celda, Set<Coordenada>> getEveryCellMovementsByColor(){
         Map<Celda, Set<Coordenada>> cellsMovementsByColor = new HashMap<>();
 
         for(Celda celda : t.getMapaTablero().values()){
-            if(celda.getPiece().getColor()==color)
+            if(celda.getPiece()!=null && celda.getPiece().getColor()!=color)
                 cellsMovementsByColor.put(celda, celda.getPiece().getNextMoves());
         }
 

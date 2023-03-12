@@ -61,6 +61,11 @@ public class Celda {
         }else color = ColorCelda.HIGHLIGHT_WHITE;
     }
 
+//    @Override
+//    public int hashCode() {
+//        return 1;
+//    }
+
     enum ColorCelda {
         WHITE_CELL(Attribute.BACK_COLOR(180, 180, 180)),
         BLACK_CELL(Attribute.BACK_COLOR(100, 100, 100)),

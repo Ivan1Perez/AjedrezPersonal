@@ -51,7 +51,7 @@ public class Entrada {
 
     public Coordenada enterCoordenada(){
         Scanner sc = new Scanner(System.in);
-        String respuesta, example = "";
+        String respuesta;
         String col = "";
         int row = 0;
         char secondChar;
