@@ -5,10 +5,16 @@ import java.util.List;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 
+/**
+ * The type Delete piece manager standar.
+ */
 public class DeletePieceManagerStandar implements IDeletePieceManager{
 
     private List<Piece> pieces;
 
+    /**
+     * Instantiates a new Delete piece manager standar.
+     */
     public DeletePieceManagerStandar(){
         pieces = new ArrayList<>();
     }

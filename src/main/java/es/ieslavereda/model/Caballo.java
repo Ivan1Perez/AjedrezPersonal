@@ -6,13 +6,19 @@ import es.ieslavereda.Tool;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Represents a knight chess piece.
+ */
 public abstract class Caballo extends Piece{
 
     private Set<Coordenada> coordenadas;
 
-    public Caballo() {
-    }
-
+    /**
+     * Instantiates a new Caballo (knight).
+     *
+     * @param pieceType the piece type
+     * @param celda     the celda
+     */
     public Caballo(PieceType pieceType, Celda celda){
         super(pieceType, celda);
     }

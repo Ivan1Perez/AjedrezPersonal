@@ -4,17 +4,29 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Coordenada test.
+ */
 class CoordenadaTest {
+    /**
+     * Initialize.
+     */
     @BeforeAll
     static void initialize(){
         System.out.println("Ejecutando beforeAll");
     }
 
+    /**
+     * Before.
+     */
     @BeforeEach
     void before(){
         System.out.println("Ejecutando beforeEach");
     }
 
+    /**
+     * Up.
+     */
     @Test
     @DisplayName("Prueba del método up")
     void up() {
@@ -24,6 +36,9 @@ class CoordenadaTest {
         assertEquals(c1.up(), c2);
     }
 
+    /**
+     * Down.
+     */
     @Test
     @DisplayName("Prueba del método down")
     void down() {
@@ -33,6 +48,9 @@ class CoordenadaTest {
         assertEquals(b1.down(), b2);
     }
 
+    /**
+     * Left.
+     */
     @Test
     @DisplayName("Prueba del método left")
     void left() {
@@ -42,6 +60,9 @@ class CoordenadaTest {
         assertEquals(b.left(), a);
     }
 
+    /**
+     * Right.
+     */
     @Test
     @DisplayName("Prueba del método right")
     void right() {
@@ -51,6 +72,9 @@ class CoordenadaTest {
         assertEquals(b.right(), c);
     }
 
+    /**
+     * Up right.
+     */
     @Test
     @DisplayName("Prueba del método upRight")
     void upRight() {
@@ -60,6 +84,9 @@ class CoordenadaTest {
         assertEquals(b.upRight(), c);
     }
 
+    /**
+     * Up left.
+     */
     @Test
     @DisplayName("Prueba del método upLeft")
     void upLeft() {
@@ -69,6 +96,9 @@ class CoordenadaTest {
         assertEquals(b.upLeft(), c);
     }
 
+    /**
+     * Down right.
+     */
     @Test
     @DisplayName("Prueba del método downRight")
     void downRight() {
@@ -78,6 +108,9 @@ class CoordenadaTest {
         assertEquals(b.downRigth(), c);
     }
 
+    /**
+     * Down left.
+     */
     @Test
     @DisplayName("Prueba del método downLeft")
     void downLeft() {

@@ -5,6 +5,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * The type Tablero.
+ */
 public class Tablero{
 
     private IDeletePieceManager remainigPieces;
@@ -12,6 +15,9 @@ public class Tablero{
     private boolean whitesUp;
     private Map<Coordenada, Celda> mapaTablero;
 
+    /**
+     * Instantiates a new Tablero.
+     */
     public Tablero(){
 
         whitesUp = false;
@@ -30,10 +36,21 @@ public class Tablero{
 
     }
 
+    /**
+     * Is whites up boolean.
+     *
+     * @return the boolean
+     */
     public boolean isWhitesUp() {
         return whitesUp;
     }
 
+    /**
+     * Get celda celda.
+     *
+     * @param coordenada the coordenada
+     * @return the celda
+     */
     public Celda getCelda(Coordenada coordenada){
         if(coordenada.getFila()<1 || coordenada.getFila()>8)
             return null;
@@ -42,22 +59,47 @@ public class Tablero{
         return mapaTablero.get(coordenada);
     }
 
+    /**
+     * Gets remainig pieces.
+     *
+     * @return the remainig pieces
+     */
     public IDeletePieceManager getRemainigPieces() {
         return remainigPieces;
     }
 
+    /**
+     * Gets deleted pieces.
+     *
+     * @return the deleted pieces
+     */
     public IDeletePieceManager getDeletedPieces() {
         return deletedPieces;
     }
 
+    /**
+     * Gets mapa tablero.
+     *
+     * @return the mapa tablero
+     */
     public Map<Coordenada, Celda> getMapaTablero() {
         return mapaTablero;
     }
 
+    /**
+     * Sets mapa tablero.
+     *
+     * @param mapaTablero the mapa tablero
+     */
     public void setMapaTablero(Map<Coordenada, Celda> mapaTablero) {
         this.mapaTablero = mapaTablero;
     }
 
+    /**
+     * Place pieces.
+     *
+     * @param color the color
+     */
     public void placePieces(Color color){
         int whites = 8, blacks = 1, whitePawns = 7, blackPawns = 2;
         char queenPosition = 'D', kingPosition = 'E';
@@ -108,16 +150,29 @@ public class Tablero{
         getRemainigPieces().add(new TorreBlanca(getCelda(new Coordenada('H',whites))));
     }
 
+    /**
+     * Highlight king.
+     *
+     * @param coordenada the coordenada
+     */
     public void highlightKing(Coordenada coordenada){
         getCelda(coordenada).highlight();
     }
 
+    /**
+     * Highlight.
+     *
+     * @param coordenadas the coordenadas
+     */
     public void highlight(Set<Coordenada> coordenadas){
 
         for (Coordenada c : coordenadas)
             getCelda(c).highlight();
     }
 
+    /**
+     * Reset colors.
+     */
     public void resetColors(){
         Collection<Celda> celdas = mapaTablero.values();
 

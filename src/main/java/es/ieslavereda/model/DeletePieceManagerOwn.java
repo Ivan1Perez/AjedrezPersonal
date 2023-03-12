@@ -2,10 +2,16 @@ package es.ieslavereda.model;
 
 import static com.diogonunes.jcolor.Ansi.colorize;
 
+/**
+ * The type Delete piece manager own.
+ */
 public class DeletePieceManagerOwn implements IDeletePieceManager{
 
     private ListaDE<Piece> pieces;
 
+    /**
+     * Instantiates a new Delete piece manager own.
+     */
     public DeletePieceManagerOwn() {
         pieces = new ListaDE<>();
     }

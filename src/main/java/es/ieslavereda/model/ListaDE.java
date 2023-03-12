@@ -1,11 +1,19 @@
 package es.ieslavereda.model;
 
+/**
+ * The type Lista de.
+ *
+ * @param <T> the type parameter
+ */
 public class ListaDE<T> {
 
     private int size;
     private Node<T> head;
     private Node<T> tail;
 
+    /**
+     * Instantiates a new Lista de.
+     */
     public ListaDE(){
 
         size = 0;
@@ -14,10 +22,20 @@ public class ListaDE<T> {
 
     }
 
+    /**
+     * Gets size.
+     *
+     * @return the size
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Add head.
+     *
+     * @param info the info
+     */
     public void addHead(T info){
         Node<T> node = new Node<>(info);
 
@@ -32,6 +50,11 @@ public class ListaDE<T> {
         size++;
     }
 
+    /**
+     * Add tail.
+     *
+     * @param info the info
+     */
     public void addTail(T info){
         Node<T> node = new Node<>(info);
 
@@ -46,6 +69,11 @@ public class ListaDE<T> {
         size++;
     }
 
+    /**
+     * Remove head t.
+     *
+     * @return the t
+     */
     public T removeHead(){
         T info = head.getInfo();
 
@@ -65,6 +93,11 @@ public class ListaDE<T> {
         return info;
     }
 
+    /**
+     * Remove tail t.
+     *
+     * @return the t
+     */
     public T removeTail(){
         T info = tail.getInfo();
 
@@ -84,6 +117,12 @@ public class ListaDE<T> {
         return info;
     }
 
+    /**
+     * Remove piece boolean.
+     *
+     * @param obj the obj
+     * @return the boolean
+     */
     public boolean removePiece(T obj){
         if (size==0) {
             return false;
@@ -121,6 +160,12 @@ public class ListaDE<T> {
 //        return count;
 //    }
 
+    /**
+     * Get t.
+     *
+     * @param index the index
+     * @return the t
+     */
     public T get(int index){
         if(index>=size || index<0)
             return null;
@@ -146,6 +191,11 @@ public class ListaDE<T> {
         return output +"}";
     }
 
+    /**
+     * To string reverse string.
+     *
+     * @return the string
+     */
     public String toStringReverse() {
         String output = "ListaDE{ Size: " + size + ", Values: ";
         Node<T> aux = tail;
@@ -157,34 +207,69 @@ public class ListaDE<T> {
         return output +"}";
     }
 
-     static class Node<T>{
+    /**
+     * The type Node.
+     *
+     * @param <T> the type parameter
+     */
+    static class Node<T>{
 
         private final T info;
         private Node<T> next;
         private Node<T> previous;
 
+        /**
+         * Instantiates a new Node.
+         *
+         * @param info the info
+         */
         public Node(T info) {
 
             this.info = info;
 
         }
 
+        /**
+         * Gets info.
+         *
+         * @return the info
+         */
         public T getInfo() {
             return info;
         }
 
+        /**
+         * Gets previous.
+         *
+         * @return the previous
+         */
         public Node<T> getPrevious() {
             return previous;
         }
 
+        /**
+         * Get next node.
+         *
+         * @return the node
+         */
         public Node<T> getNext(){
             return next;
         }
 
+        /**
+         * Sets next.
+         *
+         * @param next the next
+         */
         public void setNext(Node<T> next) {
             this.next = next;
         }
 
+        /**
+         * Sets previous.
+         *
+         * @param previous the previous
+         */
         public void setPrevious(Node<T> previous) {
             this.previous = previous;
         }

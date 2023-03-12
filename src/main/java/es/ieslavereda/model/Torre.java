@@ -6,15 +6,27 @@ import es.ieslavereda.Tool;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The type Torre.
+ */
 public abstract class Torre extends Piece{
 
 
     private Set<Coordenada> coordenadas;
     private boolean moved;
 
+    /**
+     * Instantiates a new Torre.
+     */
     public Torre() {
     }
 
+    /**
+     * Instantiates a new Torre.
+     *
+     * @param pieceType the piece type
+     * @param celda     the celda
+     */
     public Torre(PieceType pieceType, Celda celda){
         super (pieceType, celda);
         moved = false;
@@ -30,6 +42,12 @@ public abstract class Torre extends Piece{
         moved=true;
     }
 
+    /**
+     * Get next moves as torre set.
+     *
+     * @param p the p
+     * @return the set
+     */
     public static Set<Coordenada> getNextMovesAsTorre(Piece p){
         Set<Coordenada> coordenadas = new HashSet<>();
         Celda celda = p.getCelda();

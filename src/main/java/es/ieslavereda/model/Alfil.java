@@ -7,17 +7,26 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * The Alfil class represents a bishop chess piece.
+ */
 public abstract class Alfil extends Piece{
 
-    private Set<Coordenada> coordenadas;
-
-    public Alfil() {
-    }
+    /**
+     * Instantiates a new Alfil.
+     * @param pieceType the type of the piece
+     * @param celda the cell where the piece is located
+     */
 
     public Alfil(PieceType pieceType, Celda celda){
         super(pieceType, celda);
     }
 
+    /**
+     * Returns a set with all the possible moves of a bishop piece in the board.
+     * @param p the bishop piece
+     * @return the set of possible moves
+     */
     public static Set<Coordenada> getNextMovesAsAlfil(Piece p){
         Set<Coordenada> coordenadas = new HashSet<>();
         Celda celda = p.getCelda();

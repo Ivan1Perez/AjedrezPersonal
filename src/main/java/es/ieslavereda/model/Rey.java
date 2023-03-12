@@ -5,11 +5,20 @@ import es.ieslavereda.Tool;
 
 import java.util.*;
 
+/**
+ * The type Rey.
+ */
 public class Rey extends Piece{
 
     private Set<Coordenada> coordenadas;
     private boolean moved;
 
+    /**
+     * Instantiates a new Rey.
+     *
+     * @param pieceType the piece type
+     * @param celda     the celda
+     */
     public Rey(PieceType pieceType, Celda celda){
         super(pieceType, celda);
         moved = false;
@@ -111,6 +120,12 @@ public class Rey extends Piece{
             enroqueAddCoordenadas(aux, tablero);
     }
 
+    /**
+     * Enroque add coordenadas.
+     *
+     * @param aux     the aux
+     * @param tablero the tablero
+     */
     public void enroqueAddCoordenadas(List<Coordenada> aux, Tablero tablero){
         Coordenada coordenadaTorre;
         boolean noPiecesInTheWay = true;

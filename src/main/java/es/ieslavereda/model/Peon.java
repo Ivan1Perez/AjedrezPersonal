@@ -3,11 +3,20 @@ package es.ieslavereda.model;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The type Peon.
+ */
 public abstract class Peon extends Piece{
 
     private Set<Coordenada> coordenadas;
     private boolean moved;
 
+    /**
+     * Instantiates a new Peon.
+     *
+     * @param pieceType the piece type
+     * @param celda     the celda
+     */
     public Peon(PieceType pieceType, Celda celda){
         super (pieceType, celda);
         moved = false;
@@ -29,6 +38,9 @@ public abstract class Peon extends Piece{
         }
     }
 
+    /**
+     * Transform.
+     */
     public abstract void transform();
 
     @Override
@@ -51,6 +63,9 @@ public abstract class Peon extends Piece{
         return coordenadas;
     }
 
+    /**
+     * Up.
+     */
     public void up(){
         Coordenada position = getCelda().getCoordenada();
         Coordenada c;
@@ -74,6 +89,9 @@ public abstract class Peon extends Piece{
         check(c, sameColumn);
     }
 
+    /**
+     * Down.
+     */
     public void down(){
         Coordenada position = getCelda().getCoordenada();
         Coordenada c;

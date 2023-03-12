@@ -5,8 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 
 
+/**
+ * The type Entrada.
+ */
 public class Entrada {
 
+    /**
+     * Instantiates a new Entrada.
+     */
     public Entrada(){
 
         System.out.println("Start game?\n" +
@@ -15,6 +21,11 @@ public class Entrada {
 
     }
 
+    /**
+     * Get empezar boolean.
+     *
+     * @return the boolean
+     */
     public boolean getEmpezar(){
         Scanner sc = new Scanner(System.in);
         String respuesta;
@@ -31,6 +42,11 @@ public class Entrada {
         return respuesta.equalsIgnoreCase("y");
     }
 
+    /**
+     * Choose the color.
+     *
+     * @return the color
+     */
     public Color chooseColor(){
         Scanner sc = new Scanner(System.in);
         String respuesta = sc.nextLine();
@@ -49,6 +65,11 @@ public class Entrada {
         return color;
     }
 
+    /**
+     * Enter coordenada coordenada.
+     *
+     * @return the coordenada
+     */
     public Coordenada enterCoordenada(){
         Scanner sc = new Scanner(System.in);
         String respuesta;
@@ -89,6 +110,12 @@ public class Entrada {
         return new Coordenada(col.charAt(0), row);
     }
 
+    /**
+     * Select deleted piece piece.
+     *
+     * @param pieces the pieces
+     * @return the piece
+     */
     public static Piece selectDeletedPiece(List<Piece> pieces){
         Scanner scanner = new Scanner(System.in);
         String input = "";
@@ -117,6 +144,11 @@ public class Entrada {
         return pieces.get(selectedNumber);
     }
 
+    /**
+     * Yes or not answer string.
+     *
+     * @return the string
+     */
     public static String yesOrNotAnswer(){
         Scanner sc = new Scanner(System.in);
         String respuesta = sc.nextLine();

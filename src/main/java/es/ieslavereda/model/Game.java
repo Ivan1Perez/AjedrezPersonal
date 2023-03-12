@@ -2,6 +2,9 @@ package es.ieslavereda.model;
 
 import java.util.*;
 
+/**
+ * The type Game.
+ */
 public class Game {
 
     private Entrada e;
@@ -18,6 +21,9 @@ public class Game {
 
     private Map<Celda, Set<Coordenada>> availableMoves;
 
+    /**
+     * Instantiates a new Game.
+     */
     public Game() {
 
         e = new Entrada();
@@ -29,18 +35,27 @@ public class Game {
 
     }
 
+    /**
+     * Returns true if the movement is done and false if not.
+     *
+     * @return the boolean
+     */
     public boolean isMovementDone() {
         return movementDone;
     }
 
+    /**
+     * Sets movement done.
+     *
+     * @param movementDone the movement done
+     */
     public void setMovementDone(boolean movementDone) {
         this.movementDone = movementDone;
     }
 
-    public Map<Celda, Set<Coordenada>> getAvailableMoves() {
-        return availableMoves;
-    }
-
+    /**
+     * Starts the game.
+     */
     public void start(){
         boolean start = e.getEmpezar();
 
@@ -54,6 +69,9 @@ public class Game {
         }
     }
 
+    /**
+     * Insert the names of the players.
+     */
     public void insertNames(){
         Scanner sc = new Scanner (System.in);
 
@@ -65,6 +83,9 @@ public class Game {
         chooseColor();
     }
 
+    /**
+     * Gets the color choosen by the first player and sets it for the second one.
+     */
     public void chooseColor(){
         MatchScreen.chooseColorMessage(player1Name);
 
@@ -78,6 +99,9 @@ public class Game {
         t.placePieces(color);
     }
 
+    /**
+     * Match.
+     */
     public void match(){
         int turnCounter = 0;
         Color currentPlayerColor;
@@ -116,6 +140,9 @@ public class Game {
 
     }
 
+    /**
+     * Turn.
+     */
     public void turn(){
         Celda celda = selectCell();
 
@@ -137,6 +164,11 @@ public class Game {
         }
     }
 
+    /**
+     * Select cell celda.
+     *
+     * @return the celda
+     */
     public Celda selectCell(){
         Celda celda;
 
@@ -159,34 +191,47 @@ public class Game {
         return celda;
     }
 
+    /**
+     * Select movement.
+     *
+     * @param celda the celda
+     */
     public void selectMovement(Celda celda){
         boolean firstTry = true;
         Coordenada coordenadaEncontrada = null, coordenadaAux;
-        Set<Coordenada> coordsAvailable = new HashSet<>();
+        Map<Celda, Set<Coordenada>> mapaCoordsAvailable;
+        Set<Coordenada> coordenatesOfCellAvailable = new HashSet<>();
+
 
         do{
-            if(kingOnTarget && colorKingOnTarget == color && availableMoves != null && availableMoves.size() > 0) {
-                for(Set<Coordenada> coordSet : availableMoves.values()){
-                    coordsAvailable.addAll(coordSet);
-                }
-            }else
-                coordsAvailable = new HashSet<>(coordenadas);
+            if(kingOnTarget && colorKingOnTarget == color) {
+                mapaCoordsAvailable = new HashMap<>(availableMoves);
+                for(Set<Coordenada> coordenadaSet : mapaCoordsAvailable.values())
+                    coordenatesOfCellAvailable.addAll(coordenadaSet);
+            }else {
+                mapaCoordsAvailable = new HashMap<>();
+                mapaCoordsAvailable.put(celda, coordenadas);
+            }
 
-            MatchScreen.whereToMoveMessage(coordsAvailable, firstTry);
+            MatchScreen.whereToMoveMessage(coordenadas, firstTry);
             //Si la coordenada es null significa que se ha pulsado 'C' (cancelar).
             coordenadaAux = e.enterCoordenada();
             if(coordenadaAux!=null){
-                if(coordsAvailable.contains(coordenadaAux)){
-                    coordenadaEncontrada = coordenadaAux;
-                }
-                else{
-                    if(kingOnTarget && colorKingOnTarget == color)
-                        System.out.println("Movement not allowed. Be aware that the king is in check!");
-                    else
-                        System.out.println("Error. Please, select one of the possible moves.");
+                if(mapaCoordsAvailable.containsKey(celda)){
+                    for(Coordenada coordenadaSet1 : mapaCoordsAvailable.get(celda)) {
+                        if (coordenadaAux.equals(coordenadaSet1))
+                            coordenadaEncontrada = coordenadaAux;
+                        else
+                            System.out.println("The king is in check. You have to select another movement or another piece.");
+                    }
+                }else {
+                    if (kingOnTarget && colorKingOnTarget == color)
+                        System.out.println("The king is in check. You have to select another movement or another piece.");
                 }
 
                 firstTry = false;
+            } else{
+                System.out.println("Error. Please, select one of the possible moves.");
             }
 
         }while(coordenadaEncontrada==null && coordenadaAux!=null);
@@ -200,6 +245,11 @@ public class Game {
 
     }
 
+    /**
+     * Place movement.
+     *
+     * @param coordenada the coordenada
+     */
     public void placeMovement(Coordenada coordenada){
         Piece piece;
         if(!(t.getCelda(coordenada).isEmpty())) {
@@ -211,6 +261,12 @@ public class Game {
         }
     }
 
+    /**
+     * Is king on target.
+     *
+     * @param checkMateOnUse the check mate on use
+     * @param tablero        the tablero
+     */
     public void isKingOnTarget(boolean checkMateOnUse, Tablero tablero){
         Map<Coordenada, Celda> mapaTablero = new HashMap<>(tablero.getMapaTablero());
         Celda celda;
@@ -248,6 +304,11 @@ public class Game {
 
     }
 
+    /**
+     * Filter coordenates by color list.
+     *
+     * @return the list
+     */
     public List<Coordenada> filterCoordenatesByColor(){
         List<Coordenada> allPossibleMovesByColor = new ArrayList<>();
 
@@ -261,6 +322,9 @@ public class Game {
         return allPossibleMovesByColor;
     }
 
+    /**
+     * Is checkmate.
+     */
     public void isCheckmate() {
 //----------------------------------------------------------------------------------------------------------------
         //Instanciamos nuevo tablero con las posiciones de las piezas como se encuentran ahora
@@ -315,6 +379,11 @@ public class Game {
 
     }
 
+    /**
+     * Get every cell movements by color map.
+     *
+     * @return the map
+     */
     public Map<Celda, Set<Coordenada>> getEveryCellMovementsByColor(){
         Map<Celda, Set<Coordenada>> cellsMovementsByColor = new HashMap<>();
 

@@ -2,28 +2,56 @@ package es.ieslavereda.TAD;
 
 import es.ieslavereda.model.Coordenada;
 
+/**
+ * The type Node.
+ */
 public class Node {
 
     private Coordenada info;
     private Node next;
 
+    /**
+     * Instantiates a new Node.
+     *
+     * @param info the info
+     */
     public Node(Coordenada info){
         this.info = info;
         this.next = null;
     }
 
+    /**
+     * Gets info.
+     *
+     * @return the info
+     */
     public Coordenada getInfo() {
         return info;
     }
 
+    /**
+     * Sets info.
+     *
+     * @param info the info
+     */
     public void setInfo(Coordenada info) {
         this.info = info;
     }
 
+    /**
+     * Gets next.
+     *
+     * @return the next
+     */
     public Node getNext() {
         return next;
     }
 
+    /**
+     * Sets next.
+     *
+     * @param next the next
+     */
     public void setNext(Node next) {
         this.next = next;
     }

@@ -6,11 +6,23 @@ import es.ieslavereda.Tool;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The type Reina.
+ */
 public abstract class Reina extends Piece{
 
+    /**
+     * Instantiates a new Reina.
+     */
     public Reina() {
     }
 
+    /**
+     * Instantiates a new Reina.
+     *
+     * @param pieceType the piece type
+     * @param celda     the celda
+     */
     public Reina(PieceType pieceType, Celda celda){
         super(pieceType,celda);
     }

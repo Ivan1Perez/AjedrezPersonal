@@ -6,15 +6,30 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Color test.
+ */
 class ColorTest {
-    Color w, b;
+    /**
+     * The W.
+     */
+    Color w, /**
+     * The B.
+     */
+    b;
 
+    /**
+     * Initialize.
+     */
     @BeforeEach
     void initialize(){
         w = Color.WHITE;
         b = Color.BLACK;
     }
 
+    /**
+     * Next.
+     */
     @Test
     @DisplayName("Prueba cambio color")
     void next() {

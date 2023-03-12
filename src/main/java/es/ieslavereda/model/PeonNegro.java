@@ -2,7 +2,15 @@ package es.ieslavereda.model;
 
 import java.util.List;
 
+/**
+ * The type Peon negro.
+ */
 public final class PeonNegro extends Peon{
+    /**
+     * Instantiates a new Peon negro.
+     *
+     * @param celda the celda
+     */
     public PeonNegro(Celda celda){
         super(PieceType.BLACK_PEON, celda);
     }

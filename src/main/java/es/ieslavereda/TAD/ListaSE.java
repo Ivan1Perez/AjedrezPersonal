@@ -2,25 +2,46 @@ package es.ieslavereda.TAD;
 
 import es.ieslavereda.model.Coordenada;
 
+/**
+ * The type Lista se.
+ */
 public class ListaSE {
 
     private int size;
     private Node cabeza;
     private Node cola;
 
+    /**
+     * Instantiates a new Lista se.
+     */
     public ListaSE(){
         size=0;
         cabeza=null;
     }
 
+    /**
+     * Is empty boolean.
+     *
+     * @return the boolean
+     */
     public boolean isEmpty(){
         return cabeza==null;
     }
 
+    /**
+     * Size int.
+     *
+     * @return the int
+     */
     public int size(){
         return size;
     }
 
+    /**
+     * To array coordenada [ ].
+     *
+     * @return the coordenada [ ]
+     */
     public Coordenada[] toArray(){
         Coordenada[] array = new Coordenada[size];
 
@@ -33,6 +54,12 @@ public class ListaSE {
         return array;
     }
 
+    /**
+     * Remove coordenada.
+     *
+     * @param index the index
+     * @return the coordenada
+     */
     public Coordenada remove(int index){
         if(index>=size||index<0){
             return null;
@@ -74,6 +101,11 @@ public class ListaSE {
 //        size++;
 //    }
 
+    /**
+     * Add tail.
+     *
+     * @param numero the numero
+     */
     public void addTail(Coordenada numero){
         Node node = new Node(numero);
 
@@ -87,6 +119,12 @@ public class ListaSE {
         size++;
     }
 
+    /**
+     * Contains boolean.
+     *
+     * @param numero the numero
+     * @return the boolean
+     */
     public boolean contains(Coordenada numero){
 
         boolean encontrado = false;
@@ -102,6 +140,12 @@ public class ListaSE {
         return encontrado;
     }
 
+    /**
+     * Get coordenada.
+     *
+     * @param index the index
+     * @return the coordenada
+     */
     public Coordenada get(int index){
         if(index>=size || index<0)
             return null;
@@ -115,12 +159,21 @@ public class ListaSE {
         return aux.getInfo();
     }
 
+    /**
+     * Clear.
+     */
     public void clear(){
         cabeza =null;
         cola=null;
         size=0;
     }
 
+    /**
+     * Add all lista se.
+     *
+     * @param l the l
+     * @return the lista se
+     */
     public ListaSE addAll(ListaSE l){
 
         Node aux = l.cabeza;
