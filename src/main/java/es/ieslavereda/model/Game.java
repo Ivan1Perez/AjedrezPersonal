@@ -56,7 +56,7 @@ public class Game {
     /**
      * Starts the game.
      */
-    public void start(){
+    public void start() {
         boolean start = e.getEmpezar();
 
         if (start) {
@@ -72,8 +72,8 @@ public class Game {
     /**
      * Insert the names of the players.
      */
-    public void insertNames(){
-        Scanner sc = new Scanner (System.in);
+    public void insertNames() {
+        Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter player 1 name:");
         player1Name = sc.nextLine();
@@ -86,7 +86,7 @@ public class Game {
     /**
      * Gets the color choosen by the first player and sets it for the second one.
      */
-    public void chooseColor(){
+    public void chooseColor() {
         MatchScreen.chooseColorMessage(player1Name);
 
         color = e.chooseColor();
@@ -100,9 +100,17 @@ public class Game {
     }
 
     /**
-     * Match.
+     * Starts and manages the game of chess until a final state is reached.
+     * <div>
+     *     <ul>
+     *         <li>Manages and runs chess game until final state.</li>
+     *         <li>Players take turns making one move.</li>
+     *         <li>Turn counter increments each turn.</li>
+     *         <li>Winner or tie message displayed at final state.</li>
+     *     </ul>
+     * </div>
      */
-    public void match(){
+    public void match() {
         int turnCounter = 0;
         Color currentPlayerColor;
         Player currentPlayer;
@@ -127,26 +135,35 @@ public class Game {
             }
             do {
                 turn();
-            }while(coordenadas.size()==0);
+            } while (coordenadas.size() == 0);
 
-            if(!movementDone)
+            if (!movementDone)
                 continue;
 
             color = color.next();
             turnCounter++;
-        }while(!end);
+        } while (!end);
 
         MatchScreen.winnerMessage(currentPlayer, turnCounter);
 
     }
 
     /**
-     * Turn.
+     * Executes one turn of the game by allowing a player to select a cell and move a piece.
+     * <div>
+     *     <ul>
+     *         <li>Executes one turn. Player selects cell and moves piece.</li>
+     *         <li>Valid moves highlighted, message displayed if none available.</li>
+     *         <li>Board updated and checked for check or checkmate.</li>
+     *         <li>Game ended if checkmate detected.</li>
+     *         <li>Updated board displayed to player.</li>
+     *     </ul>
+     * </div>
      */
-    public void turn(){
+    public void turn() {
         Celda celda = selectCell();
 
-        if(coordenadas.size()==0)
+        if (coordenadas.size() == 0)
             MatchScreen.noMovesAvailableMessage();
         else {
             t.highlight(coordenadas);
@@ -154,10 +171,10 @@ public class Game {
             //A continuación el usuario selecciona el movimiento o cancela el mover esa pieza
             selectMovement(celda);
             t.resetColors();
-            if(movementDone){
+            if (movementDone) {
                 isKingOnTarget(false, t);
-                if(kingOnTarget)
-                    if(colorKingOnTarget!=color)
+                if (kingOnTarget)
+                    if (colorKingOnTarget != color)
                         isCheckmate();
             }
             MatchScreen.printBoard(t);
@@ -165,26 +182,31 @@ public class Game {
     }
 
     /**
-     * Select cell celda.
+     * Select the cell choosen by the player.
+     * <div>
+     *     <ul>
+     *         <li>Allows player to select cell containing piece they wish to move.</li>
+     *         <li>The loop requests the player to select coordinate until the cell containing it has a piece</li>
+     *     </ul>
+     * </div>
      *
      * @return the celda
      */
-    public Celda selectCell(){
+    public Celda selectCell() {
         Celda celda;
 
         do {
             coordenada = e.enterCoordenada();
             celda = t.getCelda(coordenada);
-            if(celda.isEmpty()) {
+            if (celda.isEmpty()) {
                 MatchScreen.emptyMessage();
                 celda = null;
-            }
-            else if (celda.getPiece().getColor() != color) {
+            } else if (celda.getPiece().getColor() != color) {
                 MatchScreen.enemyPieceMessage();
                 celda = null;
             }
 
-        }while(celda==null);
+        } while (celda == null);
 
         coordenadas = new HashSet<>(celda.getPiece().getNextMoves());
 
@@ -194,21 +216,29 @@ public class Game {
     /**
      * Select movement.
      *
-     * @param celda the celda
+     * <div>
+     *     <ul>
+     *         <li>Allows player to select movement for selected piece.</li>
+     *         <li>Loop prompts player until valid movement entered.</li>
+     *         <li>Updates game board and sets variable 'movementDone' to true.</li>
+     *     </ul>
+     * </div>
+     *
+     * @param celda the cell previously selected.
      */
-    public void selectMovement(Celda celda){
+    public void selectMovement(Celda celda) {
         boolean firstTry = true;
         Coordenada coordenadaEncontrada = null, coordenadaAux;
         Map<Celda, Set<Coordenada>> mapaCoordsAvailable;
         Set<Coordenada> coordenatesOfCellAvailable = new HashSet<>();
 
 
-        do{
-            if(kingOnTarget && colorKingOnTarget == color) {
+        do {
+            if (kingOnTarget && colorKingOnTarget == color) {
                 mapaCoordsAvailable = new HashMap<>(availableMoves);
-                for(Set<Coordenada> coordenadaSet : mapaCoordsAvailable.values())
+                for (Set<Coordenada> coordenadaSet : mapaCoordsAvailable.values())
                     coordenatesOfCellAvailable.addAll(coordenadaSet);
-            }else {
+            } else {
                 mapaCoordsAvailable = new HashMap<>();
                 mapaCoordsAvailable.put(celda, coordenadas);
             }
@@ -216,31 +246,31 @@ public class Game {
             MatchScreen.whereToMoveMessage(coordenadas, firstTry);
             //Si la coordenada es null significa que se ha pulsado 'C' (cancelar).
             coordenadaAux = e.enterCoordenada();
-            if(coordenadaAux!=null){
-                if(mapaCoordsAvailable.containsKey(celda)){
-                    for(Coordenada coordenadaSet1 : mapaCoordsAvailable.get(celda)) {
+            if (coordenadaAux != null) {
+                if (mapaCoordsAvailable.containsKey(celda)) {
+                    for (Coordenada coordenadaSet1 : mapaCoordsAvailable.get(celda)) {
                         if (coordenadaAux.equals(coordenadaSet1))
                             coordenadaEncontrada = coordenadaAux;
                         else
                             System.out.println("The king is in check. You have to select another movement or another piece.");
                     }
-                }else {
+                } else {
                     if (kingOnTarget && colorKingOnTarget == color)
                         System.out.println("The king is in check. You have to select another movement or another piece.");
                 }
 
                 firstTry = false;
-            } else{
+            } else {
                 System.out.println("Error. Please, select one of the possible moves.");
             }
 
-        }while(coordenadaEncontrada==null && coordenadaAux!=null);
+        } while (coordenadaEncontrada == null && coordenadaAux != null);
 
-        if(coordenadaEncontrada!=null) {
+        if (coordenadaEncontrada != null) {
             placeMovement(coordenadaEncontrada);
             t.getCelda(coordenada).getPiece().moveTo(coordenadaEncontrada);
             setMovementDone(true);
-        }else
+        } else
             setMovementDone(false);
 
     }
@@ -248,26 +278,28 @@ public class Game {
     /**
      * Place movement.
      *
-     * @param coordenada the coordenada
+     * @param coordenada the coordenate where the player wants to place the piece.
      */
-    public void placeMovement(Coordenada coordenada){
+    public void placeMovement(Coordenada coordenada) {
         Piece piece;
-        if(!(t.getCelda(coordenada).isEmpty())) {
+        if (!(t.getCelda(coordenada).isEmpty())) {
             piece = t.getCelda(coordenada).getPiece();
             t.getDeletedPieces().add(piece);
             t.getRemainigPieces().removePiece(piece);
-            if(piece instanceof Rey)
+            if (piece instanceof Rey)
                 end = true;
         }
     }
 
     /**
-     * Is king on target.
+     * Checks if the king is on target (check)
      *
-     * @param checkMateOnUse the check mate on use
-     * @param tablero        the tablero
+     * Move pieces checking if a player's king is under attack and getting all possible moves for a player's pieces.
+     *
+     * @param checkMateOnUse check if the function 'isCheckMate()' is being used or not
+     * @param tablero the tablero
      */
-    public void isKingOnTarget(boolean checkMateOnUse, Tablero tablero){
+    public void isKingOnTarget(boolean checkMateOnUse, Tablero tablero) {
         Map<Coordenada, Celda> mapaTablero = new HashMap<>(tablero.getMapaTablero());
         Celda celda;
         Coordenada coordendaRey = null;
@@ -284,15 +316,15 @@ public class Game {
             colorKingOnTarget = Color.WHITE;
         }
 
-        for(Coordenada c : mapaTablero.keySet()){
+        for (Coordenada c : mapaTablero.keySet()) {
             celda = mapaTablero.get(c);
-            if(claseRey.isInstance(celda.getPiece())) {
+            if (claseRey.isInstance(celda.getPiece())) {
                 coordendaRey = c;
             }
         }
-        for(Coordenada c1 : allPossibleMovesByColor)
-            if (c1.equals(coordendaRey)){
-                if(!checkMateOnUse)
+        for (Coordenada c1 : allPossibleMovesByColor)
+            if (c1.equals(coordendaRey)) {
+                if (!checkMateOnUse)
                     t.highlightKing(c1);
                 kingFound = true;
             }
@@ -309,13 +341,13 @@ public class Game {
      *
      * @return the list
      */
-    public List<Coordenada> filterCoordenatesByColor(){
+    public List<Coordenada> filterCoordenatesByColor() {
         List<Coordenada> allPossibleMovesByColor = new ArrayList<>();
 
-        for(Celda c : t.getMapaTablero().values()){
-            if(c.getPiece()!=null)
+        for (Celda c : t.getMapaTablero().values()) {
+            if (c.getPiece() != null)
                 //Obtenemos todos los posibles movimientos de las piezas del color en turno
-                if(c.getPiece().getColor()==color)
+                if (c.getPiece().getColor() == color)
                     allPossibleMovesByColor.addAll(c.getPiece().getNextMoves());
         }
 
@@ -368,11 +400,10 @@ public class Game {
         }
 
         // Si en todas las jugadas el rey sigue en jaque, hay jaque mate y se acaba la partida.
-        if(notCheckMate){
+        if (notCheckMate) {
             kingOnTarget = true;
             availableMoves = new HashMap<>(availableMovesByCells);
-        }
-        else{
+        } else {
             availableMoves = new HashMap<>();
             end = true;
         }
@@ -384,11 +415,11 @@ public class Game {
      *
      * @return the map
      */
-    public Map<Celda, Set<Coordenada>> getEveryCellMovementsByColor(){
+    public Map<Celda, Set<Coordenada>> getEveryCellMovementsByColor() {
         Map<Celda, Set<Coordenada>> cellsMovementsByColor = new HashMap<>();
 
-        for(Celda celda : t.getMapaTablero().values()){
-            if(celda.getPiece()!=null && celda.getPiece().getColor()!=color)
+        for (Celda celda : t.getMapaTablero().values()) {
+            if (celda.getPiece() != null && celda.getPiece().getColor() != color)
                 cellsMovementsByColor.put(celda, celda.getPiece().getNextMoves());
         }
 
