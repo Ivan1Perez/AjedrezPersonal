@@ -266,9 +266,30 @@ public class Game {
         if (coordenadaEncontrada != null) {
             placeMovement(coordenadaEncontrada);
             t.getCelda(coordenada).getPiece().moveTo(coordenadaEncontrada);
+            if(t.getCelda(coordenadaEncontrada).getPiece() instanceof Rey)
+                checkCastling(coordenadaEncontrada);
             setMovementDone(true);
         } else
             setMovementDone(false);
+
+    }
+
+    private void checkCastling(Coordenada coordenadaEncontrada) {
+        Coordenada previousCoordenadaTorre;
+        Coordenada nuevaCoordenadaTorre;
+
+        if(coordenada.getCol()-coordenadaEncontrada.getCol()==2 ||
+                coordenada.getCol()-coordenadaEncontrada.getCol()==-2){
+            if(coordenadaEncontrada.getCol()=='G'){
+                previousCoordenadaTorre = new Coordenada('H', coordenadaEncontrada.getFila());
+                nuevaCoordenadaTorre = new Coordenada('F', coordenadaEncontrada.getFila());
+                t.getCelda(previousCoordenadaTorre).getPiece().moveTo(nuevaCoordenadaTorre);
+            }else{
+                previousCoordenadaTorre = new Coordenada('A', coordenadaEncontrada.getFila());
+                nuevaCoordenadaTorre = new Coordenada('D', coordenadaEncontrada.getFila());
+                t.getCelda(previousCoordenadaTorre).getPiece().moveTo(nuevaCoordenadaTorre);
+            }
+        }
 
     }
 

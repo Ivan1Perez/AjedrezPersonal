@@ -91,6 +91,7 @@ public class Rey extends Piece{
         Tablero tablero = getCelda().getTablero();
         List<Coordenada> aux = new LinkedList<>();
         Coordenada coordAux = c.left();
+        Coordenada nuevaPosicionRey;
 
         //Enroque izquierda
         while (!(coordAux.getCol()<'A' || coordAux.getCol()>'H')) {
@@ -100,7 +101,8 @@ public class Rey extends Piece{
 
         if (!(tablero.getCelda(aux.get(aux.size() - 1)).isEmpty()) &&
                 !(tablero.getCelda(aux.get(aux.size() - 1)).getPiece().hasMoved())) {
-            enroqueAddCoordenadas(aux, tablero);
+            nuevaPosicionRey = aux.get(1);
+            enroqueAddCoordenadas(aux, tablero, nuevaPosicionRey);
         }
 
 
@@ -116,8 +118,10 @@ public class Rey extends Piece{
         }
 
         if (!(tablero.getCelda(aux.get(aux.size() - 1)).isEmpty()) &&
-                !(tablero.getCelda(aux.get(aux.size() - 1)).getPiece().hasMoved()))
-            enroqueAddCoordenadas(aux, tablero);
+                !(tablero.getCelda(aux.get(aux.size() - 1)).getPiece().hasMoved())){
+            nuevaPosicionRey = aux.get(1);
+            enroqueAddCoordenadas(aux, tablero, nuevaPosicionRey);
+        }
     }
 
     /**
@@ -126,19 +130,18 @@ public class Rey extends Piece{
      * @param aux     the aux
      * @param tablero the tablero
      */
-    public void enroqueAddCoordenadas(List<Coordenada> aux, Tablero tablero){
-        Coordenada coordenadaTorre;
+    public void enroqueAddCoordenadas(List<Coordenada> aux, Tablero tablero, Coordenada nuevaPosicionRey){
         boolean noPiecesInTheWay = true;
         int i = 0;
 
-        coordenadaTorre = tablero.getCelda(aux.get(aux.size()-1)).getCoordenada();
         while (i < aux.size() - 1 && noPiecesInTheWay) {
             if (!(tablero.getCelda(aux.get(i)).isEmpty()))
                 noPiecesInTheWay = false;
             i++;
         }
-        if(noPiecesInTheWay)
-            coordenadas.add(coordenadaTorre);
+        if(noPiecesInTheWay){
+            coordenadas.add(nuevaPosicionRey);
+        }
     }
 
 }
